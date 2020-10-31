@@ -64,22 +64,16 @@ class DataModel {
     }
 
     delete(id) {
-        if(id){
             const allData = this.getAll();
             for (let i = 0; i < allData.length; i++) {
                 if (allData[i].id === id){
-                    let temp = allData[allData.length - 1]
-                    allData[i]= allData[allData.length - 1]
-                    allData[allData.length - 1] = temp
-                    allData.pop()
+                    [allData[i], allData[0]] = [allData[0], allData[i]];
+                    allData.shift()
                     return true;
-                }else{
-                    return false
                 }
+               
             }
-        } else{
-            return  false;
-        }
+            return false
     }
 
     // this method will be overriden in the sub classes
