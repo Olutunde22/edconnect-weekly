@@ -1,0 +1,228 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1{
+    margin-bottom: 0;
+}
+
+.navigation{
+    height: 2rem;
+    width: 97.5%;
+    background-color: royalblue;
+    padding: 10px 20px;
+}
+
+.nav-link-white{
+    color: white;
+    text-decoration: none;
+}
+
+.nav-search,
+.form_input{
+    border-radius: 5px;
+    border-color: white;
+    padding: 7px;
+    border-width: 1px;
+    vertical-align: middle;
+}
+
+.nav-but{
+    border-radius: 4px;
+    background-color: royalblue;
+    color: white;
+    padding: 7px;
+    border-color: white;
+    border-width: 1px;
+}
+
+.nav-link{
+    color: #cccccc;
+    text-decoration: none;
+    padding: 2px;
+}
+
+.nav-left{
+    float: left;
+}
+
+.nav-right{
+    float: right;
+}
+.container{
+    padding-top: 2%;
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+.intro{
+    border-radius: 5px;
+    padding: 30px;
+    background-color: #eee;
+    height: 200px;
+}
+
+.nav-blue, 
+.nav-grey,
+.form_button{
+    text-decoration: none;
+    color: white;
+    padding: .7rem 1rem;
+    border-radius: 5px;
+    border: 0;
+}
+.nav-blue,
+.form_button{
+    background-color: royalblue;
+}
+
+.nav-grey{
+    background-color: darkslategray;
+}
+.row,
+.form_signup
+{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.row{
+    max-width: 100%;
+}
+.column-2{
+    flex-basis: 49%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+.column-3{
+    flex-basis: 33%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+.column-4{
+    flex-basis: 20%;
+    padding: 12px;
+    
+}
+.card{
+    box-sizing: border-box;
+    border: 4px solid #cccccc;
+    border-width: 1px;
+}
+.col-head{
+    color: royalblue;
+}
+.col-names{
+    color: #cccccc;
+}
+.col-tags{
+    color: royalblue;
+}
+.project-footer{
+    padding: 0.7rem;
+    padding-left: 72%;
+    right: 0;
+    height: 1rem;
+    background-color: #eee;
+    color: #cccccc;
+    margin-top: 20px;
+    border-radius: 3px;
+}
+strong{
+    color: black;
+}
+
+.form_login{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.form_signup{
+    margin-left: 15%;
+    margin-right: 15%;
+}
+.form_create{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.email,
+.password,
+.firstname,
+.program,
+.lastname,
+.matricNumber,
+.grad_year,
+.project_name,
+.project_abstract,
+.project_authors,
+.project_tags,
+.project_files,
+.prject_comment,
+.textarea,
+.form_input{
+    display: block;
+    margin: 15px;
+    margin-left: 0;
+}
+.matricnumber,
+.gradYear{
+    display: inline-block;
+    width: 40%;
+    padding: 10px;
+}
+.form_input,
+.search_input,
+.select_input{
+    padding: 10px;
+    border-color: #cccccc;
+    border-radius: 3px;
+}
+.form_input{
+    width: 100%;
+}
+.search_input{
+    width: 60%;
+}
+.select_input{
+    width: 10%;
+}
+.grey{
+    background-color: #eee;
+    padding: 20px;
+}
+.textarea{
+    width: 100%;
+}
+
+.card-files,
+.files,
+.files-white{
+    padding: 10px;
+    border: 4px solid #cccccc;
+    border-width: 1px;
+}
+.files,
+.files-white{
+    height: 30px;
+    width: 100%;
+    border-radius: 3px;
+}
+.files{
+    background-color: #eee;
+}
+.files-white{
+    background-color: white;
+}
+.card-files{
+    height: 40px;
+    width: 100%;
+    text-align: center;
+}   
+.comments{
+    text-align: center;
+    margin-top: 6%;
+}
+
+

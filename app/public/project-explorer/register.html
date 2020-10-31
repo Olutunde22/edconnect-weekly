@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Register</title>
+            <link href="css/style.css" rel="stylesheet">
+        </head>
+        <body>
+            <nav class="navigation">
+                <div class="nav-left">
+                    <a href="index.html" class="nav-link-white">Project Explorer</a>
+                    <input type="Search" placeholder="Search Projects" class="nav-search"value="Search Projects">
+                    <button class="nav-but">Search</button>
+                    <a href="search.html" class="nav-link">Projects</a>
+                    <a href="createProject.html" class="nav-link">Submit</a>
+                </div>
+                <div class="nav-right">
+                    <a href="register.html" class="nav-link">Sign up</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+            <div class="container">
+                <h1>Sign Up</h1>
+            <form class="form_signup">
+                  <div class="column-2">
+                    <div class="firstname">
+                        <label>First Name</label>
+                        <input class="form_input" type="text" name="firstName" placeholder="First Name">
+                    </div>
+                    <div class="email">
+                        <label>Email address</label>
+                        <input class="form_input" type="email" name="email" placeholder="Enter Email">
+                    </div>
+                    <div class="program">
+                    <label>Program</label>
+                        <select name="program" class="form_input">
+                            <option>Choose...</option>
+                            <option value="computer_science">Computer Science</option>
+                            <option value="computer_information_systems">Computer Information Systems</option>
+                            <option value="computer_technology">Computer Technology</option>
+                        </select>
+                    </div>
+                    <input class="form_button" type="submit" value="Sign Up">
+                </div>
+                <div class="column-2">
+                    <div class="lastname">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" class="form_input" placeholder="Last Name">
+                    </div>
+                    <div class="password">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form_input" placeholder="Your Password">
+                    </div>
+            
+                        <div class="matricnumber">
+                            <label>Matriculation Number</label>
+                            <input type="text" name="matricNumber" class="form_input" placeholder="e.g 16/2020">
+                        </div>
+                        <div class="gradYear">
+                            <label>Graduation Year</label>
+                            <select name="graduationYear" class="form_input">
+                                <option>Choose...</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                <option>2018</option>
+                                <option>2019</option>
+                                <option>2020</option>
+                            </select>
+                        </div>
+                    
+                </div>
+            </form>
+            <div class="project-footer"> 
+                Project Explorer &copy; 2020-<strong>Edconnect</strong>
+            </div>
+        </div>
+        </body>
+    </html>

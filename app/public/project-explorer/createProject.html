@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Create Project</title>
+            <link href="css/style.css" rel="stylesheet">
+        </head>
+        <body>
+            <nav class="navigation">
+                <div class="nav-left">
+                    <a href="index.html" class="nav-link-white">Project Explorer</a>
+                    <input type="Search" placeholder="Search Projects" class="nav-search"value="Search Projects">
+                    <button class="nav-but">Search</button>
+                    <a href="search.html" class="nav-link">Projects</a>
+                    <a href="createProject.html" class="nav-link">Submit</a>
+                </div>
+                <div class="nav-right">
+                    <a href="register.html" class="nav-link">Sign up</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+            <div class="container">
+                <form class="form_create">
+                    <h1>Submit Project</h1>
+                    <div class="project_name">
+                        <label>Project name</label>
+                        <input class="form_input" type="text" name="name" placeholder="Enter project name">
+                    </div>
+                    <div class="project_abstract">
+                        <label>Project abstract</label>
+                       <textarea name="abstract" class="textarea" rows="10"> </textarea>
+                    </div>
+                    <div class="project_authors">
+                        <label>Authors(s)</label>
+                        <input class="form_input" type="text" name="authors" placeholder="Enter author name (Seperated by comma)">
+                    </div>
+                    <div class="project_tags">
+                        <label>Tag(s)</label>
+                        <input class="form_input" type="text" name="tags" placeholder="Use # to tag project with different topics (e.g #javascript #mongodb)">
+                    </div>
+                    <input class="form_button" type="submit" value="Continue">
+                </form>
+                <div class="project-footer"> 
+                    Project Explorer &copy; 2020-<strong>Edconnect</strong>
+                </div>
+        </div>
+        </body>
+    </html>

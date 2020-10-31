@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Profile</title>
+            <link href="css/style.css" rel="stylesheet">
+        </head>
+        <body>
+            <nav class="navigation">
+                <div class="nav-left">
+                    <a href="index.html" class="nav-link-white">Project Explorer</a>
+                    <input type="Search" placeholder="Search Projects" class="nav-search"value="Search Projects">
+                    <button class="nav-but">Search</button>
+                    <a href="search.html" class="nav-link">Projects</a>
+                    <a href="createProject.html" class="nav-link">Submit</a>
+                </div>
+                <div class="nav-right">
+                    <a href="register.html" class="nav-link">Sign up</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+
+            <div class="container">
+            <h2>Solabi Tunde <small>test@edconnect.ng</small></h2>
+            <div class="row grey">
+                <div class="column-3">
+                        <p>Program</p>
+                        <p>computer science</p>
+                </div>
+                 <div class="column-3">
+                        <p>Matriculation Number</p>
+                        <p>00/00</p>
+                </div>
+                <div class="column-3">
+                        <p>Graduation Year</p>
+                        <p>2019</p>
+                </div>
+            </div>
+            <h3>Update Profile</h3>
+            <form class="form_signup">
+                <div class="column-2">
+                  <div class="firstname">
+                      <label>First Name</label>
+                      <input class="form_input" type="text" name="firstName" placeholder="First Name">
+                  </div>
+                  <div class="email">
+                      <label>Email address</label>
+                      <input class="form_input" type="email" name="email" placeholder="Enter Email">
+                  </div>
+                  <div class="program">
+                  <label>Program</label>
+                      <select name="program" class="form_input">
+                          <option>Choose...</option>
+                          <option value="computer_science">Computer Science</option>
+                          <option value="computer_information_systems">Computer Information Systems</option>
+                          <option value="computer_technology">Computer Technology</option>
+                      </select>
+                  </div>
+                  <input class="form_button" type="submit" value="Update Profile">
+              </div>
+              <div class="column-2">
+                  <div class="lastname">
+                      <label>Last Name</label>
+                      <input type="text" name="lastName" class="form_input" placeholder="Last Name">
+                  </div>
+                      <div class="matricNumber">
+                          <label>Matriculation Number</label>
+                          <input type="text" name="matricNumber" class="form_input" placeholder="e.g 16/2020">
+                      </div>
+                      <div class="grad_year">
+                          <label>Graduation Year</label>
+                          <select name="graduationYear" class="form_input">
+                              <option>Choose...</option>
+                              <option>2016</option>
+                              <option>2017</option>
+                              <option>2018</option>
+                              <option>2019</option>
+                              <option>2020</option>
+                          </select>
+                      </div>
+                  
+              </div>
+          </form>
+
+                <h2>Change Password</h2>
+                <form class="form_signup">
+                    <div class="column-3">
+                        <div class="password">
+                            <label>Current Password</label>
+                            <input type="password" name="currentpassword" class="form_input" placeholder="Current Password">
+                        </div>
+                        <input class="form_button" type="submit" value="Submit">
+                    </div>
+                    <div class="column-3">
+                        <div class="password">
+                            <label>New Password</label>
+                            <input type="password" name="newpassword" class="form_input" placeholder="New Password">
+                        </div>
+                    </div>
+                    <div class="column-3">
+                        <div class="password">
+                            <label>Confirm Password</label>
+                            <input type="password" name="confirmpassword" class="form_input" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                </form>
+                <div class="project-footer"> 
+                    Project Explorer &copy; 2020-<strong>Edconnect</strong>
+                </div>
+            </div>
+        </body>
+    </html>

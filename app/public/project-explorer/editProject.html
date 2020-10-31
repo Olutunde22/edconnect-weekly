@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Edit Project</title>
+            <link href="css/style.css" rel="stylesheet">
+        </head>
+        <body>
+            <nav class="navigation">
+                <div class="nav-left">
+                    <a href="index.html" class="nav-link-white">Project Explorer</a>
+                    <input type="text" placeholder="Search Projects" class="nav-search">
+                    <button class="nav-but">Search</button>
+                    <a href="search.html" class="nav-link">Projects</a>
+                    <a href="createProject.html" class="nav-link">Submit</a>
+                </div>
+                <div class="nav-right">
+                    <a href="register.html" class="nav-link">Sign up</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+
+            <div class="container">
+                <h2>Project 4</h2>
+                <div class="row grey">
+                    <div class="column-4">
+                            <p>Created By</p>
+                            <p>Ade Ade</p>
+                    </div>
+                     <div class="column-4">
+                            <p>Date Created</p>
+                            <p>2020-09-04</p>
+                    </div>
+                    <div class="column-4">
+                            <p>Last Updated</p>
+                            <p>2020-09-04</p>
+                    </div>
+                    <div class="column-4">
+                        <a href="viewProject.html" class="nav-blue">View Project</a>
+                    </div>
+                </div>
+            <form class="form_signup">
+            <div class="column-2">
+                <h2>Edit Project</h2>
+                <hr>
+                <div class="project_name">
+                    <label>Project name</label>
+                    <input class="form_input" type="text" name="name" placeholder="Enter project name" value="Project 4">
+                </div>
+                <div class="project_abstract">
+                    <label>Project abstract</label>
+                   <textarea name="abstract" class="textarea" rows="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </textarea>
+                </div>
+                <div class="project_authors">
+                    <label>Authors(s)</label>
+                    <input class="form_input" type="text" name="authors" placeholder="Enter author name (Seperated by comma)" value="Henry James, Bola Ade">
+                </div>
+                <div class="project_tags">
+                    <label>Tag(s)</label>
+                    <input class="form_input" type="text" name="tags" placeholder="Use # to tag project with different topics (e.g #javascript #mongodb)" value="#javascript ,#mongodb">
+                </div>
+                <input class="form_button" type="submit" value="Continue">
+            </div>
+            <div class="column-2">
+                <h2>Project Details</h2>
+                <hr>
+                <div class="project_files">
+                    <input type="file" name="projectFile" class="form_file">
+                </div>
+                <hr>
+                <div class="project_files">
+                    <div class="files">
+                        <strong>Project Files</strong>
+                    </div>
+                    <div class="card-files">
+                        No files uploaded yet
+                    </div>
+                </div>
+            </div>
+             </form>
+            <div class="project-footer"> 
+                Project Explorer &copy; 2020-<strong>Edconnect</strong>
+            </div>
+            </div>
+        </body>
+    </html>
