@@ -68,7 +68,9 @@ class DataModel {
             const allData = this.getAll();
             for (let i = 0; i < allData.length; i++) {
                 if (allData[i].id === id){
-                    [allData[i] , allData[allData.length - 1] = allData[allData.length - 1] , allData[i] ]
+                    let temp = allData[allData.length - 1]
+                    allData[i]= allData[allData.length - 1]
+                    allData[allData.length - 1] = temp
                     allData.pop()
                     return true;
                 }
