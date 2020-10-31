@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Search</title>
+            <link rel ="stylesheet" type="text/css" href="css/style.css">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        </head>
+        <body>
+          <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="index.html">Project Explorer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search Projects" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="search.html">Projects</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">Submit<span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" href="profile.html">Olutunde</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Logout</a>
+                </li>
+              </ul> 
+            </div>
+        </nav>
+            <div class="container my-container w-75">
+                <div class="mt-5">
+                     <h2>Project Gallery</h2> 
+                </div>
+
+                <div class="row bg-light py-4 px-3 rounded">
+                    <div class="col-md-4 mb-1">
+                        <input type="text" class="form-control form-control-lg" name="searchTerm" placeholder="Search project name, authors, tags">
+                  </div>
+                  <div class="col-md-4 mb-1">
+                    <select class="form-control float-left">
+                      <option>Name</option>
+                      <option>Project name</option>
+                      <option>Tag(s)</option>
+                      <option>Year</option>
+                    </select> 
+                   
+                  </div>
+                 
+                  <div class="col-md-4 mb-1">
+                    <input type="submit" class="btn btn-lg btn-primary"></input>
+                      </div>
+                  </div>
+
+                <div class="container my-container">
+                    <div class="mt-5">
+                   <h4>All Projects <small>(1 results)</small></h4> 
+                    </div>
+                <div class="py-4">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="card mb-4 box-shadow">
+                            <div class="card-body">
+                              <p class="text-primary">a</p>
+                              <p>dsad</p>
+                              <p>dsa</p>
+                              <p class="text-primary">#ds</p>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-light rounded">
+                        <p class="text-right m py-2 mr-3">Project explorer &copy; 2020 - <strong>Edconnect</strong></p>
+                      </div>
+              </div>
+          </div>
+          </body>
+        </body>
+    </html>

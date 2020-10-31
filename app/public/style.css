@@ -1,0 +1,29 @@
+h1 {
+    background-color: lightblue;
+    color: whitesmoke;
+}
+
+p{
+    font-size: large;
+    text-decoration: line-through;
+}
+
+a {
+    color: pink;
+}
+
+a:active,
+a:hover,
+a:visited{
+    color: blue;
+}
+
+table, th, td{
+    border: 1px solid black;
+    text-align: center;
+}
+
+audio {
+    position: absolute;
+    right: 0;
+}
