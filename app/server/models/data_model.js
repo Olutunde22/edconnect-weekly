@@ -87,7 +87,7 @@ class DataModel {
                 }
             }
         } else{
-            return  null
+            return  false;
         }
     }
 
