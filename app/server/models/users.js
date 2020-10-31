@@ -13,7 +13,8 @@ class User {
     }
 
     getFullName() {
-        return this.firstname +" "+ this.lastname
+        let fullname = this.firstname + " " + this.lastname;
+        return fullname;
     }
 }
 
@@ -24,12 +25,10 @@ class Users extends DataModel {
             if (allData[i].email === email && allData[i].password === password){
                 return true
             }
-            else{
-                return false
-         }
         }
+        return false
     }
-
+ 
     getByEmail(email) {
         const allData = this.getAll();
         for (let i = 0; i < allData.length; i++) {
