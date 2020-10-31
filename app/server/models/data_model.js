@@ -18,7 +18,6 @@ class DataModel {
         }     
     }
 }
-
     save(obj) {
         if (this.validate(obj)) {
             this.data.push(obj);
@@ -69,7 +68,7 @@ class DataModel {
             const allData = this.getAll();
             for (let i = 0; i < allData.length; i++) {
                 if (allData[i].id === id){
-                    allData[i] = allData[allData.length - 1]
+                    [allData[i] , allData[allData.length - 1] = allData[allData.length - 1] , allData[i] ]
                     allData.pop()
                     return true;
                 }
