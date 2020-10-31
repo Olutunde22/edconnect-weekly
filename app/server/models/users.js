@@ -55,21 +55,18 @@ class Users extends DataModel {
     }
 
     validate(obj) {
-        if (
-          obj.email === "" ||
+        const allData = this.getAll();
+        for (let i = 0; i < allData.length; i++) {
+          if (obj.email === "" ||
           obj.password === "" ||
           obj.firstname === "" ||
           obj.lastname === "" ||
           obj.matricNumber === "" ||
           obj.program === "" ||
           obj.graduationYear === "" ||
-          obj.password.length < 7
-        ) {
-          return false;
-        }
-        const allData = this.getAll();
-        for (let i = 0; i < allData.length; i++) {
-          if (allData[i].email === obj.email || allData[i].matricNumber === obj.matricNumber)
+          obj.password.length < 7 ||
+          allData[i].email === obj.email ||
+          allData[i].matricNumber === obj.matricNumber)
             return false;
         }
         return true;
