@@ -70,9 +70,10 @@ class DataModel {
                 if (allData[i].id === id){
                     let temp = allData[allData.length - 1]
                     allData[i]= allData[allData.length - 1]
-                    allData[allData.length - 1] = temp
                     allData.pop()
                     return true;
+                }else{
+                    return false
                 }
             }
         } else{
