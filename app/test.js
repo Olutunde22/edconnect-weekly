@@ -28,7 +28,7 @@ assert(users.update({ firstname: 'jane' }, john.id) === true);
 assert(users.getById(john.id).getFullName() === 'jane doe', `user detail is not being updated by the update method`)
 assert(users.delete(jones.id) === true);
 assert(users.getById(jones.id) === null, `deleted user should no longer be avaiable in the data array. The getById method should now return null for the specified id`)
-assert(users.getAll().length === 1);
+assert(users.getAll().length === 1, `Number is ${users.getAll().length}`) ;
 
 
 let edconnect = new Project(id(), 'edconnect', 'Some project description', ['efe amad'], ['tech'], 'efe amad');
