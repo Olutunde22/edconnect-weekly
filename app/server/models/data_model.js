@@ -77,7 +77,6 @@ class DataModel {
     }
 
     delete(id) {
-        if(id){
             const allData = this.getAll();
             for (let i = 0; i < allData.length; i++) {
                 if (allData[i].id === id){
@@ -88,9 +87,6 @@ class DataModel {
                     return  false;
                 }
             }
-        } else{
-            return  false;
-        }
     }
 
     // this method will be overriden in the sub classes
