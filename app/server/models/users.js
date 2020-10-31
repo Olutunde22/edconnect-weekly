@@ -12,9 +12,9 @@ class User {
         this.graduationYear = graduationYear
     }
 
-    getFullName() {
-        let fullname = this.firstname + " " + this.lastname;
-        return fullname;
+    getFullName(){
+        let fullName = (this.firstname + " " + this.lastname);
+        return fullName;
     }
 }
 

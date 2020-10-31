@@ -45,6 +45,14 @@ assert(projects.getAll().length === 2, `projects.getAll() method should return 2
 assert(projects.update({ authors: ['tola', 'kunle'], tags: ['ed', 'teach', 'connect'] }, edconnect.id) === true);
 assert(projects.getById(edconnect.id).authors.length === 2, `project detail is not being updated by the update method`);
 assert(projects.getById(edconnect.id).tags.length === 3, `project detail is not being updated by the update method`);
+assert(projects.delete(edconnect.id) === true);
+assert(projects.getById(edconnect.id) === null, `deleted project should no longer be avaiable in the data array. The getById method should now return null for the specified id`)
+assert(projects.getAll().length === 1, `Number is ${projects.getAll().length}`) 
+console.log(projects.getAll())
+console.log(users.getAll())
+console.log(users.getById(john.id).getFullName())
+
+
 
 
 function id(){

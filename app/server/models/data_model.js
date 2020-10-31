@@ -68,7 +68,7 @@ class DataModel {
             for (let i = 0; i < allData.length; i++) {
                 if (allData[i].id === id){
                     [allData[i], allData[0]] = [allData[0], allData[i]];
-                    allData.shift()
+                    allData.splice(allData[0],1);
                     return true;
                 }
                
