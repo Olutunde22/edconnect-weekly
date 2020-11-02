@@ -73,12 +73,6 @@ class DataModel {
                 }
             }
             return false
-            // if(this.data.find(user => user.id == id)){
-            //     this.data = this.data.filter(user => user.id != id);
-            //     return true;
-            // }else{
-            //     return false
-            // }
     }
 
     // this method will be overriden in the sub classes
