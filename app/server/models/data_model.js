@@ -64,21 +64,21 @@ class DataModel {
     }
 
     delete(id) {
-            // const allData = this.getAll();
-            // for (let i = 0; i < allData.length; i++) {
-            //     if (allData[i].id === id){
-            //         [allData[i], allData[0]] = [allData[0], allData[i]];
-            //         allData.splice(allData[0],1);
-            //         return true;
-            //     }
-            // }
-            // return false
-            if(this.data.find(user => user.id == id)){
-                this.data = this.data.filter(user => user.id != id);
-                return true;
-            }else{
-                return false
+            const allData = this.getAll();
+            for (let i = 0; i < allData.length; i++) {
+                if (allData[i].id === id){
+                    [allData[i], allData[0]] = [allData[0], allData[i]];
+                    allData.splice(allData[0],1);
+                    return true;
+                }
             }
+            return false
+            // if(this.data.find(user => user.id == id)){
+            //     this.data = this.data.filter(user => user.id != id);
+            //     return true;
+            // }else{
+            //     return false
+            // }
     }
 
     // this method will be overriden in the sub classes
