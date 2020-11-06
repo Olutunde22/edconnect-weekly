@@ -66,7 +66,7 @@ class Users extends DataModel {
           obj.password.length < 7 ||
           allData[i].email === obj.email ||
           allData[i].matricNumber === obj.matricNumber)
-            return false;
+          return false;
         }
         return true;
       }

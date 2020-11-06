@@ -12,11 +12,9 @@ class DataModel {
         for (let i = 0; i < allData.length; i++) {
             if (allData[i].id === id){
                 return allData[i]
-            }
-            else{
-                return null
-        }     
+            }    
     }
+    return null;
 }
     save(obj) {
         if (this.validate(obj)) {
