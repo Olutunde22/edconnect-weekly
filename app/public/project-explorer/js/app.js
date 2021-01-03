@@ -2,7 +2,6 @@ const signupForm = document.getElementById('signupForm')
 const loginForm = document.getElementById('loginForm')
 const creatProjectForm = document.getElementById('createProjectForm')
 
-if(window.location.href == 'http://localhost:4000/project-explorer/Register.html'){
   fetch('/api/programs',{
     method: 'GET'
   })
@@ -30,7 +29,6 @@ if(window.location.href == 'http://localhost:4000/project-explorer/Register.html
           years.appendChild(option);
       });
   });
-}
 
 
 if (signupForm) { 
@@ -269,14 +267,11 @@ function changeProjectItems(project) {
     var tag = document.createElement('p')
 
     //This is what im talking about sha step 9, go to line 260
-    projectName.href = `viewProject?id=${project[i].id}`;
-    projectName.addEventListener('click', getProject(project[i].id));
-    
-
+    projectName.href = `viewProject.html?id=${project[i].id}`;
     column.setAttribute('class', 'col-md-3')
     card.setAttribute('class', 'card mb-4 box-shadow')
     cardBody.setAttribute('class', 'card-body')
-    projectName.setAttribute('class', 'text-primary')
+    projectName.setAttribute('class', 'text-primary link')
     authors.setAttribute('class', 'card-text')
     projectContent.setAttribute('class', 'card-text')
     tagDiv.setAttribute('class', 'd-flex justify-content-between align-items-center')
@@ -301,12 +296,17 @@ function changeProjectItems(project) {
     tag.innerHTML= `${project[i].tags}`
     tagDiv.append(tag)
    }
-}
 
-// this is supposed to get the specific project and display the name, 
-//author and all sha, it works i think, if you visit just viewProject.html and check project.json file
-//the viewProject.html displays the info about the first peoject there correctly
-function getProject(id) {
+  //  for (var i = 0; i < link.length; i++){
+  //   link[i].addEventListener('click', function (e) {
+  //     e.preventDefault();
+  //     getProject(); 
+  //   });
+  //  }
+}
+  const params = new URLSearchParams(window.location.search)
+  const id = params.get('id')
+  console.log(id)
   fetch(`/api/projects/${id}`, {
     method: 'GET'
   })
@@ -359,7 +359,7 @@ function getProject(id) {
 
       function insertAfter(newNode, referenceNode) {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    }
+      }
       insertAfter(border, authors)
       border.append(authorName)
     })
@@ -370,7 +370,6 @@ function getProject(id) {
     create.append(author)
     hori.append(abstract)
   })
-}
 
 
   
