@@ -1,0 +1,10 @@
+.form-signin {
+    width: 100%;
+    max-width: 70%;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.my-container{
+    max-width: 1550px!important;
+}

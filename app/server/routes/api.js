@@ -86,7 +86,6 @@ api.post("/register", (req, res) => {
 
 api.post("/login", (req, res) => {
   const { email, password } = req.body;
-
   const success = users.authenticate(email, password);
   if (success) {
     req.session.user = users.getByEmail(email);
