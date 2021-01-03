@@ -21,21 +21,51 @@ if (creatProjectForm) {
    });
   }
   function register() {
+    fetch('/api/programs',{
+      method: 'GET'
+    })
+    .then((res) => res.json())
+    .then((response) => {
+        var programs = document.getElementById("program");
+        response.forEach((prog) => {
+          console.log(prog)
+            var opt = document.createElement("option");
+            opt.value = prog;
+            opt.text = prog;
+            programs.appendChild(opt);
+        });
+    });
+    
+    fetch('/api/graduationYears',{
+      method: 'GET'
+    })
+    .then((res) => res.json())
+    .then((response) => {
+        var years = document.getElementById("graduationYear");
+        response.forEach((year) => {
+            var option = document.createElement("option");
+            option.value = year;
+            option.text = year;
+            years.appendChild(option);
+        });
+    });
     let form = document.getElementById('signupForm');
-    let formData = new FormData(form);
-
-    let params = {};
-  
-    for (var [key, value] of formData.entries()) {
-      params[key] = value;
-    }
+    const data = {
+      "firstname": document.getElementById("firstname").value,
+      "lastname": document.getElementById("lastname").value,
+      "email": document.getElementById("email").value,
+      "password": document.getElementById("password").value,
+      "matricNumber": document.getElementById("matricNumber").value,
+      "program": document.getElementById("program").value,
+      "graduationYear": document.getElementById("graduationYear").value
+    }; 
   
     fetch('/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -258,6 +288,9 @@ function changeProjectItems(project) {
     authors.innerHTML = `${project[i].authors}`
     projectContent.innerHTML =`${project[i].abstract}`
 
+    function insertAfter(newNode, referenceNode) {
+      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
       insertAfter(authors, projectName)
       insertAfter(projectContent, authors)
       insertAfter(tagDiv, projectContent)
@@ -320,6 +353,10 @@ function getProject(id) {
       authorName.setAttribute('class', 'my-4 mx-3')
 
       authorName.innerHTML = `${element}`
+
+      function insertAfter(newNode, referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
       insertAfter(border, authors)
       border.append(authorName)
     })
@@ -332,7 +369,5 @@ function getProject(id) {
   })
 }
 
-function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
+
   
