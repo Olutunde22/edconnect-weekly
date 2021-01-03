@@ -49,6 +49,15 @@ if (creatProjectForm) {
        createProject();
    });
   }
+
+if(window.location.href.match('createProject.html') != null){
+  const uid = getCookie('uid');
+  if(uid){
+    
+  }else{
+    window.location.replace('/project-explorer/login.html');
+  }
+}
 function register() {
     let form = document.getElementById('signupForm');
     const data = {
@@ -131,10 +140,7 @@ function login() {
 }
 
 function createProject() {
-  const uid = getCookie('uid')
-  if(uid){
-  let form = document.getElementById('createProjectForm');
-    
+  let form = document.getElementById('createProjectForm');   
   const data = {
     "name": document.getElementById("name").value,
     "abstract": document.getElementById("abstract").value,
@@ -172,7 +178,6 @@ function createProject() {
           header.parentNode.insertBefore(error, header.nextSibling);
         }
       });
-    }
 }
 
 //this gets the users cookie
@@ -255,8 +260,8 @@ function getProjectData() {
 
 //this displays the project data, also loops through and shows only 4 project at a time
 function changeProjectItems(project) {
+  var showcase = document.querySelector('.showcase')
   for(i = 0; i < 4; i++){
-    var showcase = document.querySelector('.showcase')
     var column = document.createElement('div')
     var card = document.createElement('div')
     var cardBody = document.createElement('div')
@@ -296,13 +301,6 @@ function changeProjectItems(project) {
     tag.innerHTML= `${project[i].tags}`
     tagDiv.append(tag)
    }
-
-  //  for (var i = 0; i < link.length; i++){
-  //   link[i].addEventListener('click', function (e) {
-  //     e.preventDefault();
-  //     getProject(); 
-  //   });
-  //  }
 }
   const params = new URLSearchParams(window.location.search)
   const id = params.get('id')
@@ -354,6 +352,7 @@ function changeProjectItems(project) {
 
       border.setAttribute('class', 'border')
       authorName.setAttribute('class', 'my-4 mx-3')
+      authorName.setAttribute('id','project_authors')
 
       authorName.innerHTML = `${element}`
 
@@ -364,6 +363,7 @@ function changeProjectItems(project) {
       border.append(authorName)
     })
 
+    tags.setAttribute('id', 'project_tags')
     tags.innerHTML =`${res.tags}`
 
     div.append(projectName)
