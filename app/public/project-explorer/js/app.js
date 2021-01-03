@@ -2,6 +2,37 @@ const signupForm = document.getElementById('signupForm')
 const loginForm = document.getElementById('loginForm')
 const creatProjectForm = document.getElementById('createProjectForm')
 
+if(window.location.href == 'http://localhost:4000/project-explorer/Register.html'){
+  fetch('/api/programs',{
+    method: 'GET'
+  })
+  .then((res) => res.json())
+  .then((response) => {
+      var programs = document.getElementById("program");
+      response.forEach((prog) => {
+          var opt = document.createElement("option");
+          opt.value = prog;
+          opt.text = prog;
+          programs.appendChild(opt);
+      });
+  });
+  
+  fetch('/api/graduationYears',{
+    method: 'GET'
+  })
+  .then((res) => res.json())
+  .then((response) => {
+      var years = document.getElementById("graduationYear");
+      response.forEach((year) => {
+          var option = document.createElement("option");
+          option.value = year;
+          option.text = year;
+          years.appendChild(option);
+      });
+  });
+}
+
+
 if (signupForm) { 
    signupForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -20,35 +51,7 @@ if (creatProjectForm) {
        createProject();
    });
   }
-  function register() {
-    fetch('/api/programs',{
-      method: 'GET'
-    })
-    .then((res) => res.json())
-    .then((response) => {
-        var programs = document.getElementById("program");
-        response.forEach((prog) => {
-          console.log(prog)
-            var opt = document.createElement("option");
-            opt.value = prog;
-            opt.text = prog;
-            programs.appendChild(opt);
-        });
-    });
-    
-    fetch('/api/graduationYears',{
-      method: 'GET'
-    })
-    .then((res) => res.json())
-    .then((response) => {
-        var years = document.getElementById("graduationYear");
-        response.forEach((year) => {
-            var option = document.createElement("option");
-            option.value = year;
-            option.text = year;
-            years.appendChild(option);
-        });
-    });
+function register() {
     let form = document.getElementById('signupForm');
     const data = {
       "firstname": document.getElementById("firstname").value,
