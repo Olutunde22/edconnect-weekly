@@ -43,17 +43,17 @@ if (loginForm) {
         login();
     });
   }
-if (creatProjectForm) { 
-    creatProjectForm.addEventListener('submit', function (e) {
-       e.preventDefault();
-       createProject();
-   });
-  }
+
 
 if(window.location.href.match('createProject.html') != null){
   const uid = getCookie('uid');
   if(uid){
-    
+    if (creatProjectForm) { 
+      creatProjectForm.addEventListener('submit', function (e) {
+         e.preventDefault();
+         createProject(uid);
+     });
+    }
   }else{
     window.location.replace('/project-explorer/login.html');
   }
@@ -139,7 +139,7 @@ function login() {
       });
 }
 
-function createProject() {
+function createProject(uid) {
   let form = document.getElementById('createProjectForm');   
   const data = {
     "name": document.getElementById("name").value,
@@ -236,7 +236,6 @@ function changeNavItems(user){
   nameLi.setAttribute('class', 'nav-item');
   nameLi.innerHTML = `<a class="nav-link active">Hi, ${user.firstname}</a>`;
   ul.append(nameLi);
-  getProjectData()
 }
 
 //this logsout a user and deletes the cookie
@@ -246,7 +245,6 @@ function logoutUser(){
 }
 
 // This gets the project data and sends the result to the changeProjectItems function
-function getProjectData() {
   fetch(`/api/projects`, {
     method: 'GET'
   })
@@ -255,12 +253,11 @@ function getProjectData() {
     changeProjectItems(res);
   })
   .catch((err) => console.log(err));
-}
 
 
 //this displays the project data, also loops through and shows only 4 project at a time
 function changeProjectItems(project) {
-  var showcase = document.querySelector('.showcase')
+   var showcase = document.querySelector('.showcase')
   for(i = 0; i < 4; i++){
     var column = document.createElement('div')
     var card = document.createElement('div')
