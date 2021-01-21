@@ -24,8 +24,7 @@ const Header = () => {
 	});
 	const logoutUser = () => {
 		document.cookie = 'uid= ; path=/; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-		history.replace('/');
-		window.location.reload();
+		history.push('/')
 	}
 	return (
 		<Navbar bg="primary" variant="dark" className="justify-content-between" expand="lg">
