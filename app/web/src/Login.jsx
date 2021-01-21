@@ -37,6 +37,7 @@ const Login = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.status === 'ok') {
+					alert(data.data.id)
 					document.cookie = `uid=${data.data.id}; path=/`;
 					history.push('/');
 				} else {
