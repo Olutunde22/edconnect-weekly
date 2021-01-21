@@ -21,7 +21,7 @@ const Login = () => {
 				break;
 		}
 	};
-	const handleLogin = (event) => {
+	const handleLogin = event => {
 		event.preventDefault();
 		const data = {
 			email: email,
@@ -37,7 +37,7 @@ const Login = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.status === 'ok') {
-					alert(data.data.id)
+					alert(email)
 					document.cookie = `uid=${data.data.id}; path=/`;
 					history.push('/');
 				} else {
