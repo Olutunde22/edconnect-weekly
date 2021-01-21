@@ -1,9 +1,9 @@
-import react from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 
-export default (props) => {
+const Layout = (props) => {
 	return (
 		<>
 			<Header />
@@ -14,3 +14,4 @@ export default (props) => {
 		</>
 	);
 };
+export default Layout;

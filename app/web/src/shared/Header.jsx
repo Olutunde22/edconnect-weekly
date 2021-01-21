@@ -3,7 +3,7 @@ import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import {getCookie} from './cookie';
 
-export default () => {
+const Header = () => {
 	const [username, setUsername] = useState('');
 	let history = useHistory();
 
@@ -55,3 +55,4 @@ export default () => {
 		</Navbar>
 	);
 };
+export default Header;

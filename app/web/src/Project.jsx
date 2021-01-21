@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './shared/Layout';
 import { useParams } from 'react-router-dom';
-import { Container, Form, FormControl, FormGroup, Button, Row, Col, Card } from 'react-bootstrap';
+import { Container, FormControl, FormGroup, Button, Row, Col, Card } from 'react-bootstrap';
 
-export default () => {
+const Project = () => {
 	const { id } = useParams();
 	const [projects, setProjects] = useState([]);
 	const [name, setName] = useState('');
@@ -118,3 +118,6 @@ export default () => {
 		</Layout>
 	);
 };
+
+
+export default Project;

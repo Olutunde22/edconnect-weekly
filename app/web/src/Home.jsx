@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Jumbotron, Button, Container, Row, Col, Card } from 'react-bootstrap';
 
-export default () => {
+const Home = () => {
 	const projects =()=> {
 		return fetch(`/api/projects`, {
 			method: 'GET',
@@ -61,3 +61,5 @@ export default () => {
 		</Layout>
 	);
 };
+
+export default Home;

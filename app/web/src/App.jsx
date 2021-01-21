@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';

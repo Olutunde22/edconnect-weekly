@@ -4,7 +4,7 @@ import Layout from './shared/Layout';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import {getCookie} from './shared/cookie';
 
-export default () => {
+ const CreateProject =() => {
 	const [name, setName] = useState('');
 	const [abstract, setAbstract] = useState('');
 	const [authors, setAuthors] = useState('');
@@ -60,7 +60,7 @@ export default () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.status == 'ok') {
+				if (data.status === 'ok') {
 					document.cookie = `uid=${uid}; path=/`;
 					history.push('/');
 				} else {
@@ -136,3 +136,5 @@ export default () => {
 	);
 
 };
+
+export default CreateProject;

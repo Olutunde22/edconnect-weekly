@@ -1,6 +1,5 @@
-import react from 'react';
-
-export default () => {
+import React from 'react';
+const Footer =() => {
 	return (
 		<div class="bg-light rounded">
 			<p class="text-right m py-2 mr-3">
@@ -9,3 +8,5 @@ export default () => {
 		</div>
 	);
 };
+
+export default Footer;

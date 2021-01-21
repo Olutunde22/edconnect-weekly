@@ -3,7 +3,7 @@ import Layout from './shared/Layout';
 import { useHistory } from 'react-router-dom';
 import { Container, Form, FormControl, FormGroup, Button, Alert } from 'react-bootstrap';
 
-export default () => {
+const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errors, setError] = useState('');
@@ -36,7 +36,7 @@ export default () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.status == 'ok') {
+				if (data.status === 'ok') {
 					document.cookie = `uid=${data.data.id}; path=/`;
 					history.push('/');
 				} else {
@@ -80,3 +80,4 @@ export default () => {
 		</Layout>
 	);
 };
+export default Login;
