@@ -42,12 +42,12 @@ const Project = () => {
 			<>
 				<Container>
 					<div class="mt-5">
-						<h2>{projects.name}</h2>
+						<h2 id="project_name">{projects.name}</h2>
 					</div>
 					<Row className="bg-light pt-3 rounded">
 						<Col>
 							<p class="mb-0 createdBy">Created by</p>
-							<p>{name}</p>
+							<p id="project_author">{name}</p>
 						</Col>
 						<Col>
 							<p class="mb-0">Date Created</p>
@@ -68,7 +68,8 @@ const Project = () => {
 							<FormGroup>
 								<h3 class="mt-5">Project Abstract</h3>
 								<hr class="hori" />
-								{projects.abstract}
+								<p id="project_abstract">{projects.abstract}</p>
+								
 							</FormGroup>
 							<FormGroup>
 								<h3 class="mt-5">Comments</h3>
@@ -98,11 +99,11 @@ const Project = () => {
 							</Card>
 							{authors.map((authors) => (
 								<Card className="border">
-									<p class="my-4 mx-3">{authors}</p>
+									<p id="project_authors" class="my-4 mx-3">{authors}</p>
 								</Card>
 							))}
 							<Card className="border bg-light">
-								<p class="my-4 mx-3 text-primary">{projects.tags}</p>
+								<p class="my-4 mx-3 text-primary" id="project_tags">{projects.tags}</p>
 							</Card>
 
 							<Card className="border mt-5 bg-light">

@@ -37,7 +37,7 @@ const Home = () => {
 				</Jumbotron>
 
 				<Container>
-					<Row>
+					<Row className="showcase">
 						{project.slice(0, 4).map((proj) => (
 							<Col key={proj.name} className="col-md-3">
 								<Card className="mb-4 box-shadow">

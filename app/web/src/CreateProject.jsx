@@ -73,7 +73,7 @@ import {getCookie} from './shared/cookie';
 		<Layout>
 			<>
 				<Container>
-					<Form className="my-5 justify-content-center w-75 form-signin">
+					<Form className="my-5 justify-content-center w-75 form-signin" id="createProjectForm">
 						<h1>Submit Project</h1>
 						{error ? (
 							<Alert variant="danger">

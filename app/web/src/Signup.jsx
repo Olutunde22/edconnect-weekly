@@ -100,7 +100,7 @@ const Signup = () => {
 		<Layout>
 			<>
 				<Container>
-					<Form className="my-5">
+					<Form className="my-5" id="signupForm">
 						<h1>Sign Up</h1>
 						{error ? (
 							<Alert variant="danger">

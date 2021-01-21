@@ -48,7 +48,7 @@ const Login = () => {
 		<Layout>
 			<>
 				<Container className="border rounded p-5 mt-3 mb-4">
-					<Form className="justify-content-center">
+					<Form className="justify-content-center" id="loginForm">
 						<h1>Login</h1>
 						{errors ? <Alert variant="danger">{errors}</Alert> : null}
 						<FormGroup>
