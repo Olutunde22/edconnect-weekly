@@ -1,3 +1,4 @@
+import React from 'react';
 export const getCookie = (uid) => {
 	var name = uid + '=';
 	var decodedCookie = decodeURIComponent(document.cookie);
