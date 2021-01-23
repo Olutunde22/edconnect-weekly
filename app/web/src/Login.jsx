@@ -9,7 +9,7 @@ const Login = () => {
 	const [errors, setError] = useState('');
 	let history = useHistory();
 
-	const handleInputChange = (event) => {
+	const handleInputChange = event => {
 		const { name, value } = event.target;
 
 		switch (name) {
@@ -21,6 +21,7 @@ const Login = () => {
 				break;
 		}
 	};
+
 	const handleLogin = event => {
 		event.preventDefault();
 		const data = {
@@ -37,7 +38,6 @@ const Login = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.status === 'ok') {
-					alert(email)
 					document.cookie = `uid=${data.data.id}; path=/`;
 					history.push('/');
 				} else {

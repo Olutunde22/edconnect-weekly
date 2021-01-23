@@ -19,9 +19,9 @@ const Header = () => {
 	useEffect(() => {
 		const uid = getCookie('uid');
 		if (uid) {
-			getUserInfo(uid);
+			getUserInfo(uid);			
 		}
-	});
+	}, []);
 	const logoutUser = () => {
 		document.cookie = 'uid= ; path=/; expires = Thu, 01 Jan 1970 00:00:00 GMT';
 		history.push('/')
