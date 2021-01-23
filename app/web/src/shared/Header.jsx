@@ -37,7 +37,7 @@ const Header = () => {
 				</Form>
 				<Nav className="mr-auto">
 					<Nav.Link href="/projects">Projects</Nav.Link>
-					<Nav.Link href="/project/submit">CreateProject</Nav.Link>
+					<Nav.Link href="/project/submit">Create project</Nav.Link>
 				</Nav>
 				{username !== '' || null ? (
 					<Nav className="justify-content-end">

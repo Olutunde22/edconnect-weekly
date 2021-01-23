@@ -13,14 +13,14 @@ const CreateProject = () => {
 	let history = useHistory();
 	let {url} = useRouteMatch('/project/submit');
 
-	useEffect(() => {
-		if (url ==='/project/submit') {
-			const uid = getCookie('uid');
-			if (!uid) {
-				history.push('/login');
-			}
-		}
-	});
+	// useEffect(() => {
+	// 	if (url ==='/project/submit') {
+	// 		const uid = getCookie('uid');
+	// 		if (!uid) {
+	// 			history.push('/login');
+	// 		}
+	// 	}
+	// },[]);
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
@@ -40,7 +40,7 @@ const CreateProject = () => {
 		}
 	};
 
-	const handleProject = (event) => {
+	const handleProject = event => {
 		const uid = getCookie('uid');
 		event.preventDefault();
 		const data = {
