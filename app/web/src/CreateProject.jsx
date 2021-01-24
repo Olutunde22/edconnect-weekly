@@ -11,7 +11,7 @@ const CreateProject = () => {
 	const [tags, setTags] = useState('');
 	const [error, setError] = useState('');
 	let history = useHistory();
-	let {url} = useRouteMatch('/project/submit');
+	// let {url} = useRouteMatch('/project/submit');
 
 	// useEffect(() => {
 	// 	if (url ==='/project/submit') {
