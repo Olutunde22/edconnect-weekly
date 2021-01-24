@@ -6,11 +6,11 @@ import Signup from './Signup';
 import CreateProject from './CreateProject';
 import Project from './Project';
 import './App.css';
-import { getCookie } from './shared/cookie'
+import { getCookie } from './shared/cookie';
 
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-const uid = getCookie('uid')
+const uid = getCookie('uid');
 function App() {
 	return (
 		<Router>
@@ -18,9 +18,9 @@ function App() {
 				<Route path="/" exact={true} component={Home} />
 				<Route path="/login" component={Login} />
 				<Route path="/signup" component={Signup} />
-				{uid  ? (
+				{uid ? (
 					<Route path="/project/submit" component={CreateProject} />
-				):(
+				) : (
 					<Redirect to="/login" />
 				)}
 				<Route path="/project/:id" component={Project} />
