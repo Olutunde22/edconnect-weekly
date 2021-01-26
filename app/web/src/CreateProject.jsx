@@ -48,15 +48,15 @@ const CreateProject = () => {
 			},
 			body: JSON.stringify(data),
 		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.status === 200) {
-					document.cookie = `uid=${uid}; path=/`;
-					history.push('/');
-				} else {
-					setError(data.errors);
-				}
-			});
+		.then(async(res) => {
+			var data = await res.json()	
+			if (res.status === 200) {
+				document.cookie = `uid=${uid}; path=/`;
+				history.push('/');
+			} else {
+				setError('Invalid email/password');
+			}
+		})
 	};
 
 	return (

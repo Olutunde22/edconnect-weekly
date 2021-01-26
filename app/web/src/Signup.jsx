@@ -85,15 +85,15 @@ const Signup = () => {
 			},
 			body: JSON.stringify(data),
 		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.status === 200) {
+			.then(async(res) => {
+				var data = await res.json()	
+				if (res.status === 200) {
 					document.cookie = `uid=${data.data.id}; path=/`;
 					history.push('/');
 				} else {
 					setError(data.errors);
 				}
-			});
+			})
 	};
 
 	return (
