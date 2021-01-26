@@ -3,6 +3,7 @@ import { Container, Form, FormControl, FormGroup, Button, Alert } from 'react-bo
 import Layout from './shared/Layout';
 import { useHistory} from 'react-router-dom';
 import { getCookie } from './shared/cookie';
+import { Redirect } from 'react-router-dom';
 
 const CreateProject = () => {
 	const [name, setName] = useState('');
@@ -59,6 +60,10 @@ const CreateProject = () => {
 		})
 	};
 
+	if(!getCookie('uid')){
+		return <Redirect to="/login" />
+	}
+	
 	return (
 		<Layout>
 			<>
