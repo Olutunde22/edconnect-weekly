@@ -54,7 +54,7 @@ const CreateProject = () => {
 				document.cookie = `uid=${uid}; path=/`;
 				history.push('/');
 			} else {
-				setError('Invalid email/password');
+				setError(data.errors);
 			}
 		})
 	};
