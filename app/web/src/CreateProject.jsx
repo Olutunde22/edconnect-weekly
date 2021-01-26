@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Container, Form, FormControl, FormGroup, Button, Alert } from 'react-bootstrap';
 import Layout from './shared/Layout';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import { getCookie } from './shared/cookie';
 
 const CreateProject = () => {
@@ -11,16 +11,7 @@ const CreateProject = () => {
 	const [tags, setTags] = useState('');
 	const [error, setError] = useState('');
 	let history = useHistory();
-	// let {url} = useRouteMatch('/project/submit');
-
-	// useEffect(() => {
-	// 	if (url ==='/project/submit') {
-	// 		const uid = getCookie('uid');
-	// 		if (!uid) {
-	// 			history.push('/login');
-	// 		}
-	// 	}
-	// },[]);
+	
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
@@ -59,7 +50,7 @@ const CreateProject = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.status === 'ok') {
+				if (data.status === 200) {
 					document.cookie = `uid=${uid}; path=/`;
 					history.push('/');
 				} else {

@@ -87,7 +87,7 @@ const Signup = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.status === 'ok') {
+				if (data.status === 200) {
 					document.cookie = `uid=${data.data.id}; path=/`;
 					history.push('/');
 				} else {
