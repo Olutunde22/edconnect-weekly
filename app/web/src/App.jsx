@@ -16,10 +16,10 @@ function App() {
 		<Router>
 			<Switch>
 				<Route path="/" exact={true} component={Home} />
-				<Route path="/login" component={Login} />
-				<Route path="/signup" component={Signup} />
+				<Route path="/login" exact={true} component={Login} />
+				<Route path="/signup" exact={true} component={Signup} />
 				{uid ? (
-					<Route path="/project/submit" component={CreateProject} />
+					<Route path="/project/submit" exact={true} component={CreateProject} />
 				) : (
 					<Redirect to="/login" />
 				)}
