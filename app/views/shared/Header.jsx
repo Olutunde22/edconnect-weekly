@@ -18,7 +18,7 @@ const Header = ({firstname}) => {
 				</Form>
 				<Nav className="mr-auto">
 					<Nav.Link href="/projects">Projects</Nav.Link>
-					<Nav.Link href="/project/submit">Create Project</Nav.Link>
+					<Nav.Link href="/projects/submit">Create Project</Nav.Link>
 				</Nav>
 				{username !== undefined ? (
 					<Nav className="justify-content-end">

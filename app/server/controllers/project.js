@@ -30,7 +30,7 @@ router.post('/projects/submit', (req, res) => {
 		res.redirect('/');
 	} else {
 		req.flash('error', Project[1]);
-		res.redirect('/project/submit');
+		res.redirect('/projects/submit');
 	}
 });
 
