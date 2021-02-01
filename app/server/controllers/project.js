@@ -6,7 +6,7 @@ const project = require('../services/project');
 
 const user = require('../services/user')
 
-router.get('/project/submit', (req, res) => {
+router.get('/submit', (req, res) => {
 	if (req.session.user) {
 		const user = req.session.user;
 		let error = req.flash('error');
@@ -16,7 +16,7 @@ router.get('/project/submit', (req, res) => {
 	}
 });
 
-router.post('/project/submit', (req, res) => {
+router.post('/submit', (req, res) => {
 	const createdBy = req.session.user.id;
 	const name = req.body.name;
 	const abstract = req.body.abstract;
@@ -34,7 +34,7 @@ router.post('/project/submit', (req, res) => {
 	}
 });
 
-router.get('/project/:id', (req,res) =>{
+router.get('/:id', (req,res) =>{
     const id = req.params.id
     const Project = project.getById(id)
     const User = user.getById(Project.createdBy)

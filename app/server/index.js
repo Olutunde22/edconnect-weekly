@@ -36,9 +36,9 @@ register(app).then(() => {
 	
 	app.use(flash())
 	app.use('/api', require('./routes/api'));
-	app.use("/", require("./controllers/home"));
 	app.use("/", require("./controllers/user"));
-	app.use("/", require("./controllers/project"));
+	app.use("/", require("./controllers/home"));
+	app.use("/project", require("./controllers/project"));
 	app.use(express.static('public'));
 	
 

@@ -18,12 +18,12 @@ const Header = ({firstname}) => {
 				</Form>
 				<Nav className="mr-auto">
 					<Nav.Link href="/projects">Projects</Nav.Link>
-					<Nav.Link href="/project/submit">Create project</Nav.Link>
+					<Nav.Link href="/project/submit">Create Project</Nav.Link>
 				</Nav>
 				{username !== undefined ? (
 					<Nav className="justify-content-end">
 						<Nav.Link href="/logout"eventKey="">Logout</Nav.Link>
-						<Nav.Link href="" disabled>Hi, {username} </Nav.Link>	
+						<Nav.Link id="username"href="" disabled>Hi, {username} </Nav.Link>	
 					</Nav>
 				) : (
 					<Nav className="justify-content-end">

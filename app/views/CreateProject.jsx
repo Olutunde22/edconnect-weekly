@@ -44,7 +44,7 @@ const CreateProject = (props) => {
 				<Container>
 					<Form className="my-5 justify-content-center w-75 form-signin" id="createProjectForm" method="POST" action="/project/submit">
 						<h1>Submit Project</h1>
-						{error.length > 1 ? (
+						{error.length > 0 ? (
 							<Alert variant="danger">
 								{error.map((error) => (
 									<p key={error}>{error}</p>

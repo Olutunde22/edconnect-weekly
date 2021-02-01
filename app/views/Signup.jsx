@@ -66,7 +66,7 @@ const Signup = (props) => {
 				<Container>
 					<Form className="my-5" id="signupForm" method="POST" action="signup">
 						<h1>Sign Up</h1>
-						{error.length > 1 ? (
+						{error.length > 0 ? (
 							<Alert variant="danger">
 								{error.map((error) => (
 									<p key={error}>{error}</p>
