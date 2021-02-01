@@ -37,10 +37,10 @@ const Signup = (props) => {
 		const { name, value } = event.target;
 
 		switch (name) {
-			case 'firstname':
+			case 'firstName':
 				setFirstname(value);
 				break;
-			case 'lastname':
+			case 'lastName':
 				setLastname(value);
 				break;
 			case 'email':
@@ -82,7 +82,7 @@ const Signup = (props) => {
 									type="text"
 									placeholder="First Name"
 									id="firstname"
-									name="firstname"
+									name="firstName"
 								/>
 							</Form.Group>
 							<Form.Group as={Col}>
@@ -93,7 +93,7 @@ const Signup = (props) => {
 									type="text"
 									placeholder="Last Name"
 									id="lastname"
-									name="lastname"
+									name="lastName"
 								/>
 							</Form.Group>
 						</Form.Row>
