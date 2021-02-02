@@ -42,7 +42,7 @@ const CreateProject = (props) => {
 		<Layout {...user}>
 			<>
 				<Container>
-					<Form className="my-5 justify-content-center w-75 form-signin" id="createProjectForm" method="POST" action="/project/submit">
+					<Form className="my-5 justify-content-center w-75 form-signin" id="createProjectForm" method="POST" action="/projects/submit">
 						<h1>Submit Project</h1>
 						{error.length > 0 ? (
 							<Alert variant="danger">
