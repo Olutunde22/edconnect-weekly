@@ -4,7 +4,7 @@ const router = express.Router();
 
 const project = require('../services/project');
 
-const user = require('../services/user')
+const user = require('../services/user');
 
 router.get('/projects/submit', (req, res) => {
 	if (req.session.user) {
@@ -34,10 +34,10 @@ router.post('/projects/submit', (req, res) => {
 	}
 });
 
-router.get('/project/:id', (req,res) =>{
-    const id = req.params.id
-    const Project = project.getById(id)
-    const User = user.getById(Project.createdBy)
-    res.render('Project', { Project, User });
-})
+router.get('/project/:id', (req, res) => {
+	const id = req.params.id;
+	const Project = project.getById(id);
+	const User = user.getById(Project.createdBy);
+	res.render('Project', { Project, User });
+});
 module.exports = router;

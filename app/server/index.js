@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const register = require('@react-ssr/express/register');
 const express = require('express');
 const bodyParser = require('body-parser');

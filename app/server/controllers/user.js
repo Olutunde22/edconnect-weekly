@@ -9,7 +9,7 @@ const user = require('../services/user');
 router.get('/login', (req, res) => {
 	const user = req.session.user;
 	let error = req.flash('error');
-	res.render('login', { error, user });
+	res.render('Login', { error, user });
 });
 
 router.post('/login', (req, res) => {
