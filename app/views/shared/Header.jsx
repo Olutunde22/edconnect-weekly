@@ -3,10 +3,6 @@ import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 
 
 const Header = ({firstname}) => {
-	const [username, setUsername] = useState('');
-	useEffect(() => {
-		setUsername(firstname)
-	}, []);
 	return (
 		<Navbar bg="primary" variant="dark" className="justify-content-between" expand="lg">
 			<Navbar.Brand href="/">Project Explorer</Navbar.Brand>
@@ -23,7 +19,7 @@ const Header = ({firstname}) => {
 				{username !== undefined ? (
 					<Nav className="justify-content-end">
 						<Nav.Link href="/logout"eventKey="">Logout</Nav.Link>
-						<Nav.Link id="username"href="" disabled>Hi, {username} </Nav.Link>	
+						<Nav.Link id="username"href="" disabled>Hi, {firstname} </Nav.Link>	
 					</Nav>
 				) : (
 					<Nav className="justify-content-end">
