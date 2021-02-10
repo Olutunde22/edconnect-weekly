@@ -16,7 +16,7 @@ const Header = ({firstname}) => {
 					<Nav.Link href="/projects">Projects</Nav.Link>
 					<Nav.Link href="/projects/submit">Create Project</Nav.Link>
 				</Nav>
-				{username !== undefined ? (
+				{firstname !== undefined ? (
 					<Nav className="justify-content-end">
 						<Nav.Link href="/logout"eventKey="">Logout</Nav.Link>
 						<Nav.Link id="username"href="" disabled>Hi, {firstname} </Nav.Link>	
