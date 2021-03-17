@@ -7,11 +7,17 @@ const Project = (props) => {
 	const [projects, setProjects] = useState([]);
 	const [name, setName] = useState('');
 	const [authors, setAuthors] = useState([]);
+	const [createdAt, setCreatedAt] = useState('');
+	const [lastUpdated, setLastUpdated] = useState('');
 
 	const project = () => {
+		let created = new Date(props.Project.createdAt).toLocaleDateString();
+		let updated = new Date(props.Project.updatedAt).toLocaleDateString();
 		setProjects(props.Project);
 		getUserName();
 		setAuthors(props.Project.authors);
+		setCreatedAt(created);
+		setLastUpdated(updated);
 	};
 
 	const getUserName = () => {
@@ -37,11 +43,11 @@ const Project = (props) => {
 						</Col>
 						<Col>
 							<p className="mb-0">Date Created</p>
-							<p>2020-08-04</p>
+							<p>{createdAt}</p>
 						</Col>
 						<Col>
 							<p className="mb-0">Last Updated</p>
-							<p>2020-08-04</p>
+							<p>{lastUpdated}</p>
 						</Col>
 						<Col>
 							<Button variant="primary" className="float-right" href="">

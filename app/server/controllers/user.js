@@ -12,17 +12,23 @@ router.get('/login', (req, res) => {
 	res.render('Login', { error, user });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
-	const User = user.authenticate(email, password);
-	if (User[0] === true) {
-		req.session.user = User[1];
-		res.redirect('/');
-	} else {
-		req.flash('error', User[1]);
-		res.redirect('/login');
-	}
+	const User = await user
+		.authenticate(email, password)
+		.then((User) => {
+			if (User[0] === true) {
+				req.session.user = User[1];
+				res.redirect('/');
+			} else {
+				req.flash('error', User[1]);
+				res.redirect('/login');
+			}
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 });
 
 router.get('/signup', (req, res) => {
@@ -31,7 +37,7 @@ router.get('/signup', (req, res) => {
 	res.render('Signup', { getPrograms, getGradYears, error, user });
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
 	const firstname = req.body.firstName;
 	const lastname = req.body.lastName;
 	const email = req.body.email;
@@ -40,22 +46,28 @@ router.post('/signup', (req, res) => {
 	const matricNumber = req.body.matricNumber;
 	const graduationYear = req.body.graduationYear;
 
-	const User = user.create({
-		firstname,
-		lastname,
-		email,
-		password,
-		matricNumber,
-		program,
-		graduationYear,
-	});
-	if (User[0] === true) {
-		req.session.user = User[1];
-		res.redirect('/');
-	} else {
-		req.flash('error', User[1]);
-		res.redirect('/signup');
-	}
+	const User = await user
+		.create({
+			firstname,
+			lastname,
+			email,
+			password,
+			matricNumber,
+			program,
+			graduationYear,
+		})
+		.then((User) => {
+			if (User[0] === true) {
+				req.session.user = User[1];
+				res.redirect('/');
+			} else {
+				req.flash('error', User[1]);
+				res.redirect('/signup');
+			}
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 });
 
 module.exports = router;

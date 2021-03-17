@@ -1,72 +1,69 @@
-// imports
-const fs = require("fs");
-const path = require("path");
-const Users = require("../models/users").Users;
-const User = require("../models/users").User;
+const User = require('../models/user');
+const helper = require('../models/mongo_helper');
 
-// load data file
-const usersFile = path.join(__dirname, "../users.json");
-
-// helper functions
-const saveJsonFile = (file, data) => fs.writeFileSync(file, JSON.stringify({ data }));
-const getFileAsJson = (file) => JSON.parse(fs.readFileSync(file));
-const saveUsersToFile = (data) => saveJsonFile(usersFile, data);
-const id = () => Math.random().toString(36).substring(2);
-
-// populate users with data from file.
-const users = new Users();
-users.data = getFileAsJson(usersFile).data;
-
-/* Creates new user */
-const create = ({
-  firstname,
-  lastname,
-  email,
-  password,
-  matricNumber,
-  program,
-  graduationYear,
+//Create a user
+const create = async ({
+	firstname,
+	lastname,
+	email,
+	password,
+	matricNumber,
+	program,
+	graduationYear,
 }) => {
-  const user = new User(
-    id(),
-    firstname,
-    lastname,
-    email,
-    password,
-    matricNumber,
-    program,
-    graduationYear
-  );
-  if (users.save(user)) {
-    saveUsersToFile(users.data);
-    return [true, user];
-  } else {
-    return [false, users.errors];
-  }
+	try {
+		const user = new User({
+			firstname,
+			lastname,
+			email,
+			password,
+			matricNumber,
+			program,
+			graduationYear,
+		});
+		user.setPassword(password);
+		const saved = await user.save();
+		if (saved) {
+			return [true, user];
+		}
+	} catch (error) {
+		return [false, helper.translateError(error)];
+	}
 };
 
 /* Authenticate a user */
-const authenticate = (email, password) => {
-  if (users.authenticate(email, password)) {
-    return [true, users.getByEmail(email)];
-  } else {
-    return [false, ["Invalid email/password"]];
-  }
+const authenticate = async (email, password) => {
+	try {
+		const user = await User.findOne({ email: email });
+		if (user != null) {
+			const authenticated = await user.validPassword(password);
+			if (authenticated) {
+				return [true, user];
+			} else {
+				return [false, ['Invalid email/password']];
+			}
+		} else {
+			return [false, ['Invalid email/password']];
+		}
+	} catch (error) {
+		return helper.translateError(error);
+	}
 };
 
 /* Return user with specified id */
-const getById = (id) => {
-  return users.getById(id);
+const getById = async (id) => {
+	const user = await User.findById(id);
+	return user;
 };
 
 /* Return all users */
 const getAll = () => {
-  return users.getAll();
+	return User.find();
 };
 
 module.exports = {
-  create,
-  authenticate,
-  getById,
-  getAll,
+	create,
+	authenticate,
+	getById,
+	getAll,
 };

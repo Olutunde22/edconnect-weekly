@@ -2,11 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const project = require('../services/project').getAll();
+const projects = require('../services/project');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 	const user = req.session.user;
-	res.render('Home', { project, user });
+	const project = await projects.getAll().then((project) => {
+		res.render('Home', { project, user });
+	});
 });
 
 router.get('/logout', (req, res) => {

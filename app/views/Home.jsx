@@ -40,7 +40,7 @@ const Home = (props) => {
 							<Col key={proj.name} className="col-md-3">
 								<Card className="mb-4 box-shadow">
 									<Card.Body>
-										<a href={`/project/${proj.id}`} className="text-primary">
+										<a href={`/project/${proj._id}`} className="text-primary">
 											{' '}
 											{proj.name}
 										</a>
