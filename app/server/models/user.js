@@ -18,21 +18,17 @@ const UserSchema = new Schema(
 	{ timestamps: true }
 );
 
-const hash = (password, salt) => {
-	crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
-};
-
 UserSchema.methods.setPassword = function (password) {
 	if (password.length >= 7) {
 		this.salt = crypto.randomBytes(16).toString('hex');
-		this.password = hash(password, this.salt);
+		this.password = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 	} else {
 		throw new error('Password length should be more than 7');
 	}
 };
 
 UserSchema.methods.validPassword = function (password) {
-	return this.password === hash(password, this.salt);
+	return this.password === crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
 
 const User = mongoose.model('Users', UserSchema);

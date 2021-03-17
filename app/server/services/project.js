@@ -4,7 +4,7 @@ const helper = require('../models/mongo_helper');
 /* Create new project */
 const create = async ({ name, abstract, authors, tags, createdBy }) => {
 	try {
-		const project = new Project({name, abstract, authors, tags, createdBy});
+		const project = new Project({ name, abstract, authors, tags, createdBy });
 		const saved = await project.save();
 		if (saved) {
 			return [true, project];
@@ -21,8 +21,9 @@ const getById = async (id) => {
 };
 
 /* Return all Projects */
-const getAll = () => {
-	return Project.find();
+const getAll = async () => {
+	const project = await Project.find();
+	return project;
 };
 
 module.exports = {
