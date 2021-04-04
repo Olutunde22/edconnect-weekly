@@ -19,7 +19,7 @@ const UserSchema = new Schema(
 );
 
 UserSchema.methods.setPassword = function (password) {
-	if (password.length > 7 || password != "") {
+	if (password.length > 7) {
 		this.salt = crypto.randomBytes(16).toString('hex');
 		this.password = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 	} else {
