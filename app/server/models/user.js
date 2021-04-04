@@ -23,7 +23,7 @@ UserSchema.methods.setPassword = function (password) {
 		this.salt = crypto.randomBytes(16).toString('hex');
 		this.password = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 	} else {
-		throw new Error('Password length should be more than 7');
+		throw new Error('password should have at least 7 characters');
 	}
 };
 
