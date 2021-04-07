@@ -88,8 +88,8 @@ const Project = (props) => {
 								<h5 className="my-4 mx-3">Author(s)</h5>
 							</Card>
 							{authors.map((authors) => (
-								<Card className="border">
-									<p id="project_author" className="my-4 mx-3">
+								<Card key={authors} className="border">
+									<p id="project_authors" className="my-4 mx-3">
 										{authors}
 									</p>
 								</Card>
