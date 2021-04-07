@@ -9,19 +9,16 @@ const Project = (props) => {
 	const [authors, setAuthors] = useState([]);
 	const [createdAt, setCreatedAt] = useState('');
 	const [lastUpdated, setLastUpdated] = useState('');
+	let created = new Date(props.Project.createdAt).toLocaleDateString();
+	let updated = new Date(props.Project.updatedAt).toLocaleDateString();
 
-	const project = () => {
-		let created = new Date(props.Project.createdAt).toLocaleDateString();
-		let updated = new Date(props.Project.updatedAt).toLocaleDateString();
+
+	useEffect(() => {
 		setProjects(props.Project);
 		setCreatedBy(props.User.firstname + " " + props.User.lastname);
 		setAuthors(props.Project.authors);
 		setCreatedAt(created);
 		setLastUpdated(updated);
-	};
-
-	useEffect(() => {
-		project();
 	}, []);
 
 	return (
@@ -83,8 +80,8 @@ const Project = (props) => {
 								<h5 className="my-4 mx-3">Author(s)</h5>
 							</Card>
 							{(authors.map((authors) => (
-								<Card key={authors} className="border">
-									<p id="project_authors" className="my-4 mx-3">
+								<Card key={authors} className="border" id="project_authors">
+									<p  className="my-4 mx-3">
 										{authors}
 									</p>
 								</Card>
