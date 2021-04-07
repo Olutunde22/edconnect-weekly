@@ -89,7 +89,7 @@ const Project = (props) => {
 							</Card>
 							{authors.map((authors) => (
 								<Card className="border">
-									<p id="project_author" className="my-4 mx-3">
+									<p id="project_authors" className="my-4 mx-3">
 										{authors}
 									</p>
 								</Card>
