@@ -5,7 +5,7 @@ import { Container, FormControl, FormGroup, Button, Row, Col, Card } from 'react
 const Project = (props) => {
 	const { user } = props;
 	const [projects, setProjects] = useState([]);
-	const [name, setName] = useState('');
+	const [createdBy, setCreatedBy] = useState('');
 	const [authors, setAuthors] = useState([]);
 	const [createdAt, setCreatedAt] = useState('');
 	const [lastUpdated, setLastUpdated] = useState('');
@@ -14,7 +14,7 @@ const Project = (props) => {
 		let created = new Date(props.Project.createdAt).toLocaleDateString();
 		let updated = new Date(props.Project.updatedAt).toLocaleDateString();
 		setProjects(props.Project);
-		setName(`${props.User.firstname}  ${props.User.lastname}`);
+		setCreatedBy(props.User.firstname + " " + props.User.lastname);
 		setAuthors(props.Project.authors);
 		setCreatedAt(created);
 		setLastUpdated(updated);
@@ -34,7 +34,7 @@ const Project = (props) => {
 					<Row className="bg-light pt-3 rounded">
 						<Col>
 							<p className="mb-0 createdBy">Created by</p>
-							<p id="project_author">{name}</p>
+							<p id="project_author">{createdBy}</p>
 						</Col>
 						<Col>
 							<p className="mb-0">Date Created</p>
