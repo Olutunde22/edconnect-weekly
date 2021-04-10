@@ -79,13 +79,15 @@ const Project = (props) => {
 							<Card className="border bg-light">
 								<h5 className="my-4 mx-3">Author(s)</h5>
 							</Card>
-							{(authors.map((authors) => (
+							
 								<Card key={authors} className="border" id="project_authors">
+								{(authors.map((authors) => (
 									<p  className="my-4 mx-3">
 										{authors}
 									</p>
+									)))}
 								</Card>
-							)))}
+							
 							<Card className="border bg-light">
 								<p className="my-4 mx-3 text-primary" id="project_tags">
 									{projects.tags}
