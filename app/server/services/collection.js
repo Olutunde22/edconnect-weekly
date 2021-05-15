@@ -41,7 +41,7 @@ const saveToCollection = async ({ projectID, name }) => {
 };
 
 /*Change status of project from private to public and vice versa */
-const changeStatus = async ({status, id}) => {
+const changeStatus = async ({ status, id }) => {
 	const collection = await Collection.findById({ _id: id });
 	if (status === 'Private') {
 		collection.status = 'Public';
@@ -55,7 +55,7 @@ const changeStatus = async ({status, id}) => {
 	return false;
 };
 
-const deleteProject = async ({projectID, id}) =>{
+const deleteProject = async ({ projectID, id }) => {
 	const collection = await Collection.findById({ _id: id });
 	collection.projects.pull(projectID);
 	const saved = await collection.save();
@@ -63,7 +63,11 @@ const deleteProject = async ({projectID, id}) =>{
 		return true;
 	}
 	return false;
-}
+};
+
+const deleteCollection = async ({ id }) => {
+	await Collection.deleteOne({ _id: id });
+};
 
 module.exports = {
 	create,
@@ -71,5 +75,6 @@ module.exports = {
 	getCollection,
 	saveToCollection,
 	changeStatus,
-	deleteProject
+	deleteProject,
+	deleteCollection
 };

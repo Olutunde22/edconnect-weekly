@@ -16,7 +16,6 @@ router.get('/projects/submit', (req, res) => {
 	}
 });
 
-
 router.post('/projects/submit', async (req, res) => {
 	try {
 		const createdBy = req.session.user._id;
@@ -56,42 +55,6 @@ router.get('/project/:id', async (req, res) => {
 		});
 	} catch (error) {
 		res.redirect('/');
-	}
-});
-
-router.post('/project/createCollection', async (req, res) => {
-	try {
-		if (req.session.user) {
-			const user = req.session.user;
-			const createdBy = req.session.user._id;
-			const name = req.body.name;
-			const projectID = req.body.projectID;
-			let Collection = [];
-
-			Collection = await collection.getCollection({ createdBy });
-			for (var i = 0; i < Collection.length; i++) {
-				if (Collection[i].name === name) {
-					req.flash('error', 'This collection name exists in your collection');
-					return res.redirect(`/project/${projectID}`);
-				}
-			}
-
-			await collection.create({ name, createdBy, projectID }).then(Collection => {
-				if (Collection[0] === true) {
-					req.session.user = user;
-					req.flash('success', 'Project has been added to your collection');
-					res.redirect(`/project/${projectID}`);
-				} else {
-					req.flash('error', Colelction[1]);
-					res.redirect(`/project/${projectID}`);
-				}
-			});
-		} else {
-			req.flash('error', 'You must be logged in to create a collection');
-			res.redirect('/login');
-		}
-	} catch (error) {
-		console.log(error);
 	}
 });
 

@@ -10,11 +10,16 @@ const MyCollection = props => {
 	const [projects, setProjects] = useState([]);
 	const [allCollection, setAllCollections] = useState([]);
 	const [NewCollectionName, setNewCollectionName] = useState('');
+	const [CollectionName, setCollectionName] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
 	const [collectShow, setCollectShow] = useState(false);
+	const [deleteShow, setDeleteShow] = useState(false);
+
 	const CollectClose = () => setCollectShow(false);
 	const CollectShow = () => setCollectShow(true);
+	const DeleteClose = () => setDeleteShow(false);
+	const DeleteShow = () => setDeleteShow(true);
 
 	useEffect(() => {
 		setError(props.error);
@@ -25,8 +30,15 @@ const MyCollection = props => {
 	}, []);
 
 	const handleInputChange = event => {
-		const { value } = event.target;
-		setNewCollectionName(value);
+		const { name, value } = event.target;
+
+		switch (name) {
+			case 'collectionName':
+				setCollectionName(value);
+				break;
+			case 'name':
+				setNewCollectionName(value);
+		}
 	};
 
 	return (
@@ -34,14 +46,59 @@ const MyCollection = props => {
 			<>
 				{error.length > 0 ? <Alert variant="warning">{error}</Alert> : null}
 				{success.length > 0 ? <Alert variant="success">{success}</Alert> : null}
-				<h2 className="mt-5 mb-5">My Library</h2>
 				<Row>
-					<Col xs={2}>
+					<Col>
+						<h2 className="mt-5 mb-5">My Library</h2>
+					</Col>
+					<Col>
+						<Button variant="danger" className="mt-5 mb-5" onClick={DeleteShow}>
+							Delete Collection
+						</Button>
+						<Modal show={deleteShow} onHide={DeleteClose}>
+							<Form method="POST" action="deleteCollection" path="/deleteCollection">
+								<Modal.Header closeButton>
+									<p className="text-danger font-weight-bold">
+										This will delete this collection and remove all projects inside, type the name
+										of the collection below to continue
+									</p>
+								</Modal.Header>
+
+								<Modal.Body>
+									<Form.Control
+										value={CollectionName}
+										onChange={handleInputChange}
+										type="text"
+										placeholder="Collection Name"
+										id="collectionName"
+										name="collectionName"
+									/>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" onClick={DeleteClose}>
+										Back
+									</Button>
+
+									<Button
+										variant="danger"
+										className={`${CollectionName !== collection.name ? 'disabled' : 'active'}`}
+										type="submit"
+									>
+										Delete
+									</Button>
+									<input type="hidden" name="collectionID" value={collection._id} />
+								</Modal.Footer>
+							</Form>
+						</Modal>
+					</Col>
+				</Row>
+
+				<Row>
+					<Col>
 						<Button variant="primary" onClick={CollectShow}>
 							Create Collection
 						</Button>
 					</Col>
-					<Col xs={8}>
+					<Col lg={6}>
 						<h2>{collection.name}</h2>
 					</Col>
 					<Col>
@@ -56,19 +113,7 @@ const MyCollection = props => {
 				</Row>
 
 				<Row>
-					<Col xs={2}>
-						<div className="mt-5">
-							{allCollection.length > 0
-								? allCollection.map(collection => (
-										<a href={`/MyLibrary/${collection._id}`} className="text-primary btn">
-											{' '}
-											{collection.name}
-										</a>
-								  ))
-								: null}
-						</div>
-					</Col>
-					<Col xs={10}>
+					<Col>
 						<table className="table mt-5">
 							<thead>
 								<tr>
@@ -110,7 +155,7 @@ const MyCollection = props => {
 				</Row>
 
 				<Modal show={collectShow} onHide={CollectClose}>
-					<Form method="POST" action="createCollection" path="/createCollection">
+					<Form method="POST" action="createCollection" path="/MyLibrary/createCollection">
 						<Modal.Header closeButton>
 							<Modal.Title>Collection Name</Modal.Title>
 						</Modal.Header>
