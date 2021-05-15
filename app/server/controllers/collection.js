@@ -73,16 +73,26 @@ router.get('/MyLibrary/:id', async (req, res) => {
 		let error = req.flash('error');
 		let success = req.flash('success');
 		let Collection = [];
-		let User = req.session.user;
-
-		if (req.session.user) {
-			let collection = await collections.getById(id);
-			const createdBy = collection.createdBy;
-			Collection = await collections.getCollection({ createdBy });
+		let User = req.session.user || '';
+		let createdBy = '';
+		let collection = await collections.getById(id);
+		createdBy = collection.createdBy;
+		Collection = await collections.getCollection({ createdBy });
+		if (collection.status === 'Private') {
+			if (User) {
+				if (User._id == createdBy) {
+					res.render('MyLibrary', { collection, User, createdBy, error, success, Collection });
+				} else {
+					req.flash('error', 'The collection you are trying to access is Private');
+					res.redirect('/MyCollection');
+				}
+			} else {
+				req.flash('error', 'The collection you are trying to access is Private');
+				res.redirect('/login');
+			}
+		} else if (collection.status === 'Public') {
+			console.log('Got here???');
 			res.render('MyLibrary', { collection, User, createdBy, error, success, Collection });
-		} else {
-			req.flash('error', 'You need to be logged in to have a collection');
-			res.redirect('/login');
 		}
 	} catch (error) {
 		req.flash('error', 'An error occured while fetching your collection');

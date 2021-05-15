@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const MyCollection = props => {
 	const { User } = props;
+	const { createdBy } = props;
 	const [collection, setCollections] = useState('');
 	const [projects, setProjects] = useState([]);
 	const [NewCollectionName, setNewCollectionName] = useState('');
@@ -49,9 +50,12 @@ const MyCollection = props => {
 						<h2 className="mt-5 mb-5">My Library</h2>
 					</Col>
 					<Col>
-						<Button variant="danger" className="mt-5 mb-5" onClick={DeleteShow}>
-							Delete Collection
-						</Button>
+						{User._id === createdBy ? (
+							<Button variant="danger" className="mt-5 mb-5" onClick={DeleteShow}>
+								Delete Collection
+							</Button>
+						) : null}
+
 						<Modal show={deleteShow} onHide={DeleteClose}>
 							<Form method="POST" action="deleteCollection" path="/deleteCollection">
 								<Modal.Header closeButton>
@@ -100,13 +104,15 @@ const MyCollection = props => {
 						<h2>{collection.name}</h2>
 					</Col>
 					<Col>
-						<Form method="POST" action="status" path="/status">
-							<Button variant="primary" type="submit">
-								{collection.status === 'Private' ? 'Make Public' : 'Make Private'}
-							</Button>
-							<input type="hidden" name="status" value={collection.status} />
-							<input type="hidden" name="collectionID" value={collection._id} />
-						</Form>
+						{User._id === createdBy ? (
+							<Form method="POST" action="status" path="/status">
+								<Button variant="primary" type="submit">
+									{collection.status === 'Private' ? 'Make Public' : 'Make Private'}
+								</Button>
+								<input type="hidden" name="status" value={collection.status} />
+								<input type="hidden" name="collectionID" value={collection._id} />
+							</Form>
+						) : null}
 					</Col>
 				</Row>
 
@@ -133,6 +139,7 @@ const MyCollection = props => {
 											</td>
 											<td>{projects.authors}</td>
 											<td>{projects.createdAt}</td>
+											{User._id === createdBy ? (
 											<td>
 												<Form method="POST" action="delete" path="/delete">
 													<IconButton aria-label="delete" type="submit">
@@ -142,6 +149,7 @@ const MyCollection = props => {
 													<input type="hidden" name="collectionID" value={collection._id} />
 												</Form>
 											</td>
+											) : null}
 										</tr>
 									))
 								) : (
