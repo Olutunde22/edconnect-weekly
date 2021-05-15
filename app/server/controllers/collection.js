@@ -83,15 +83,14 @@ router.get('/MyLibrary/:id', async (req, res) => {
 				if (User._id == createdBy) {
 					res.render('MyLibrary', { collection, User, createdBy, error, success, Collection });
 				} else {
-					req.flash('error', 'The collection you are trying to access is Private');
+					req.flash('error', 'You don’t have access to this collection');
 					res.redirect('/MyCollection');
 				}
 			} else {
-				req.flash('error', 'The collection you are trying to access is Private');
+				req.flash('error', 'You don’t have access to this collection');
 				res.redirect('/login');
 			}
 		} else if (collection.status === 'Public') {
-			console.log('Got here???');
 			res.render('MyLibrary', { collection, User, createdBy, error, success, Collection });
 		}
 	} catch (error) {
