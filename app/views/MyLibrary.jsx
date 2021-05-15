@@ -8,7 +8,6 @@ const MyCollection = props => {
 	const { User } = props;
 	const [collection, setCollections] = useState('');
 	const [projects, setProjects] = useState([]);
-	const [allCollection, setAllCollections] = useState([]);
 	const [NewCollectionName, setNewCollectionName] = useState('');
 	const [CollectionName, setCollectionName] = useState('');
 	const [error, setError] = useState('');
@@ -25,7 +24,6 @@ const MyCollection = props => {
 		setError(props.error);
 		setSuccess(props.success);
 		setCollections(props.collection);
-		setAllCollections(props.Collection);
 		setProjects(props.collection.projects);
 	}, []);
 
