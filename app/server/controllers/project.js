@@ -102,6 +102,7 @@ router.post('/project/save', async (req, res) => {
 			const projectID = req.body.projectID;
 			await collection.saveToCollection({ projectID, name }).then(saved => {
 				if (saved) {
+					req.flash('success', 'Saved to collection');
 					res.redirect(`/project/${projectID}`);
 				}
 			});

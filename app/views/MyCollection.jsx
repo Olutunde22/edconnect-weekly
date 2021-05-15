@@ -100,7 +100,7 @@ const MyCollection = props => {
 							</Card>
 						))
 				) : (
-					<h2>Sorry you have not yet created a collection, create one now</h2>
+					<h3>Sorry you have not yet created a collection, create one now</h3>
 				)}
 			</>
 		</Layout>

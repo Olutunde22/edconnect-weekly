@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Button, Form, Modal, Alert, Row, Col } from 'react-bootstrap';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const MyCollection = props => {
 	const { User } = props;
-	const [collection, setCollections] = useState([]);
+	const [collection, setCollections] = useState('');
+	const [projects, setProjects] = useState([]);
 	const [allCollection, setAllCollections] = useState([]);
 	const [NewCollectionName, setNewCollectionName] = useState('');
 	const [error, setError] = useState('');
@@ -18,6 +21,7 @@ const MyCollection = props => {
 		setSuccess(props.success);
 		setCollections(props.collection);
 		setAllCollections(props.Collection);
+		setProjects(props.collection.projects);
 	}, []);
 
 	const handleInputChange = event => {
@@ -41,28 +45,28 @@ const MyCollection = props => {
 						<h2>{collection.name}</h2>
 					</Col>
 					<Col>
-						<Form method="POST" action="Status" path="/status">
+						<Form method="POST" action="status" path="/status">
 							<Button variant="primary" type="submit">
 								{collection.status === 'Private' ? 'Make Public' : 'Make Private'}
 							</Button>
-                            <input type="hidden" name="status" value={collection.status}/>
-                            <input type="hidden" name="collectionID" value={collection._id}/>
+							<input type="hidden" name="status" value={collection.status} />
+							<input type="hidden" name="collectionID" value={collection._id} />
 						</Form>
 					</Col>
 				</Row>
 
 				<Row>
 					<Col xs={2}>
-                        <div className="mt-5">
-						{allCollection.length > 0
-							? allCollection.map(collection => (
-									<a href={`/MyLibrary/${collection._id}`} className="text-primary btn">
-										{' '}
-										{collection.name}
-									</a>
-							  ))
-							: null}
-                            </div>
+						<div className="mt-5">
+							{allCollection.length > 0
+								? allCollection.map(collection => (
+										<a href={`/MyLibrary/${collection._id}`} className="text-primary btn">
+											{' '}
+											{collection.name}
+										</a>
+								  ))
+								: null}
+						</div>
 					</Col>
 					<Col xs={10}>
 						<table className="table mt-5">
@@ -71,20 +75,35 @@ const MyCollection = props => {
 									<th scope="col">Title</th>
 									<th scope="col">Authors</th>
 									<th scope="col">Date Created</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								{/* {collection.projects.length > 0 ? (
-									collection.projects.map(project => (
+								{projects.length > 0 ? (
+									projects.map(projects => (
 										<tr>
-											<td>{project.name}</td>
-											<td>{project.authors}</td>
-											<td>{project.createdAt}</td>
+											<td>
+												<a href={`/project/${projects._id}`} className="text-primary">
+													{' '}
+													{projects.name}
+												</a>
+											</td>
+											<td>{projects.authors}</td>
+											<td>{projects.createdAt}</td>
+											<td>
+												<Form method="POST" action="delete" path="/delete">
+													<IconButton aria-label="delete" type="submit">
+														<DeleteIcon />
+													</IconButton>
+													<input type="hidden" name="projectID" value={projects._id} />
+													<input type="hidden" name="collectionID" value={collection._id} />
+												</Form>
+											</td>
 										</tr>
 									))
 								) : (
-									<h3 className="mt-3">No Project in this collection</h3>
-								)} */}
+									<h3>No project in this collection</h3>
+								)}
 							</tbody>
 						</table>
 					</Col>

@@ -103,7 +103,28 @@ router.post('/MyLibrary/status' , async (req,res) =>{
 			})
 		}
 	}catch(error){
-		req.flash('error', error)
+		req.flash('error', `${error}`)
+		res.redirect('/login')
+	}
+})
+
+router.post('/MyLibrary/delete', async (req,res) =>{
+	try{
+		if(req.session.user){
+			const id = req.body.collectionID
+			const projectID = req.body.projectID
+			await collections.deleteProject({projectID, id}).then((result)=>{
+				if(result == true){
+					req.flash('success', `Project removed from collection`)
+					res.redirect(`/Mylibrary/${id}`)
+				}else{
+					req.error('error', 'Something went wrong in changing status, please try again later')
+					res.redirect(`/Mylibrary/${id}`)
+				}
+			})
+		}
+	}catch(error){
+		req.flash('error', `${error}`)
 		res.redirect('/login')
 	}
 })
