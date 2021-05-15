@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 
 
@@ -13,7 +13,7 @@ const Header = ({firstname}) => {
 					<Button variant="outline-light">Search</Button>
 				</Form>
 				<Nav className="mr-auto">
-					<Nav.Link href="/projects">Projects</Nav.Link>
+					<Nav.Link href="/MyCollection">My Library</Nav.Link>
 					<Nav.Link href="/projects/submit">Create Project</Nav.Link>
 				</Nav>
 				{firstname !== undefined ? (

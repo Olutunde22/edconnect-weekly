@@ -19,12 +19,9 @@ const Login = (props) => {
 				break;
 		}
 	};	
-	const errorData = () => {
-		setError(props.error)
-	};
 
 	useEffect(() => {
-		errorData();
+		setError(props.error)
 	}, []);
 
 	return (

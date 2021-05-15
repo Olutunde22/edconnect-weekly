@@ -1,33 +1,124 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './shared/Layout';
-import { Container, FormControl, FormGroup, Button, Row, Col, Card } from 'react-bootstrap';
+import {
+	Container,
+	FormControl,
+	FormGroup,
+	Button,
+	Row,
+	Col,
+	Card,
+	Modal,
+	Form
+} from 'react-bootstrap';
 
-const Project = (props) => {
+const Project = props => {
 	const { user } = props;
 	const [projects, setProjects] = useState([]);
 	const [createdBy, setCreatedBy] = useState('');
 	const [authors, setAuthors] = useState([]);
 	const [createdAt, setCreatedAt] = useState('');
 	const [lastUpdated, setLastUpdated] = useState('');
+	const [collectionName, setCollectionName] = useState([]);
+	const [show, setShow] = useState(false);
+	const [collectShow, setCollectShow] = useState(false);
+	const [NewCollectionName, setNewCollectionName] = useState('')
 	let created = new Date(props.Project.createdAt).toLocaleDateString();
 	let updated = new Date(props.Project.updatedAt).toLocaleDateString();
 
+	const CollectClose = () => setCollectShow(false);
+	const CollectShow = () => setCollectShow(true);
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	useEffect(() => {
 		setProjects(props.Project);
-		setCreatedBy(props.User.firstname + " " + props.User.lastname);
+		setCreatedBy(props.User.firstname + ' ' + props.User.lastname);
 		setAuthors(props.Project.authors);
 		setCreatedAt(created);
 		setLastUpdated(updated);
+		setCollectionName(props.collectionNames);
 	}, []);
+
+
+	const handleInputChange = event => {
+		const { value } = event.target;
+		setNewCollectionName(value);
+	};
 
 	return (
 		<Layout {...user}>
 			<>
 				<Container>
-					<div className="mt-5">
-						<h2 id="project_name">{projects.name}</h2>
-					</div>
+					<Row>
+						<Col>
+							<div className="mt-5">
+								<h2 id="project_name">{projects.name}</h2>
+							</div>
+						</Col>
+						<Col className="mt-5">
+							{user != undefined ? (
+								<Button variant="primary" onClick={handleShow}>
+									Save
+								</Button>
+							) : null}
+
+							<Modal show={show} onHide={handleClose}>
+								<Form method="POST" action="save" path="/save">
+									<Modal.Header closeButton>
+										<Modal.Title>Add this project to a collection</Modal.Title>
+									</Modal.Header>
+									<Modal.Body>
+										<Form.Control as="select" name="name" value={collectionName.name}>
+											<option>Choose...</option>
+											{collectionName.length > 0
+												? collectionName.map(collection => <option key={collection.name}>{collection.name}</option>)
+												: null}
+										</Form.Control>
+									</Modal.Body>
+									<Modal.Footer>
+										<Button variant="secondary" onClick={CollectShow}>
+											Create Collection
+										</Button>
+
+										<Button variant="primary" type="submit">
+											Save
+										</Button>
+										<input type="hidden" name="projectID" value={projects._id} />
+									</Modal.Footer>
+								</Form>
+							</Modal>
+
+							<Modal show={collectShow} onHide={CollectClose}>
+								<Form method="POST" action="createCollection" path="/project/createCollection">
+									<Modal.Header closeButton>
+										<Modal.Title>Collection Name</Modal.Title>
+									</Modal.Header>
+
+									<Modal.Body>
+										<Form.Control
+											value={NewCollectionName}
+											onChange={handleInputChange}
+											type="text"
+											placeholder="Collection Name"
+											id="name"
+											name="name"
+										/>
+									</Modal.Body>
+									<Modal.Footer>
+										<Button variant="secondary" onClick={CollectClose}>
+											Back
+										</Button>
+
+										<Button variant="primary" type="submit">
+											Create
+										</Button>
+										<input type="hidden" name="projectID" value={projects._id} />
+									</Modal.Footer>
+								</Form>
+							</Modal>
+						</Col>
+					</Row>
 					<Row className="bg-light pt-3 rounded">
 						<Col>
 							<p className="mb-0 createdBy">Created by</p>
@@ -40,11 +131,6 @@ const Project = (props) => {
 						<Col>
 							<p className="mb-0">Last Updated</p>
 							<p>{lastUpdated}</p>
-						</Col>
-						<Col>
-							<Button variant="primary" className="float-right" href="">
-								Edit Project
-							</Button>
 						</Col>
 					</Row>
 					<Row>
@@ -79,15 +165,13 @@ const Project = (props) => {
 							<Card className="border bg-light">
 								<h5 className="my-4 mx-3">Author(s)</h5>
 							</Card>
-							
-								<Card key={authors} className="border" id="project_authors">
-								{(authors.map((authors) => (
-									<p  className="my-4 mx-3">
-										{authors}
-									</p>
-									)))}
-								</Card>
-							
+
+							<Card key={authors} className="border" id="project_authors">
+								{authors.map(authors => (
+									<p className="my-4 mx-3">{authors}</p>
+								))}
+							</Card>
+
 							<Card className="border bg-light">
 								<p className="my-4 mx-3 text-primary" id="project_tags">
 									{projects.tags}

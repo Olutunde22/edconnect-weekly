@@ -15,21 +15,11 @@ const Signup = (props) => {
 	const [programs, setPrograms] = useState([]);
 	const [gradYear, setGradYear] = useState([]);
 
-	const ProgramData = () => {
-		setPrograms(props.getPrograms)
-	};
-
-	const GraduationYearData = () => {
-		setGradYear(props.getGradYears)
-	};
-	const errorData = () => {
-		setError(props.error)
-	};
 
 	useEffect(() => {
-		ProgramData();
-		GraduationYearData();
-		errorData()
+		setPrograms(props.getPrograms)
+		setGradYear(props.getGradYears)
+		setError(props.error)
 	}, []);
 
 
