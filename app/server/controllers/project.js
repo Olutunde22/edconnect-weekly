@@ -77,7 +77,7 @@ router.post('/project/createCollection', async (req, res) => {
 					req.session.user = user;
 					res.redirect(`/project/${projectID}`);
 				} else {
-					req.flash('error', Project[1]);
+					req.flash('error', Colelction[1]);
 					res.redirect(`/project/${projectID}`);
 				}
 			});

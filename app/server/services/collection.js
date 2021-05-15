@@ -7,10 +7,10 @@ const create = async ({ name, createdBy, projectID }) => {
 		const collection = new Collection({ name, createdBy, projectID });
 		if (typeof projectID !== 'undefined') {
 			collection.projects.push(projectID);
-			const saved = await collection.save();
-			if (saved) {
-				return [true, collection];
-			}
+		}
+		const saved = await collection.save();
+		if (saved) {
+			return [true, collection];
 		}
 	} catch (error) {
 		return [false, helper.translateError(error)];

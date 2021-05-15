@@ -17,30 +17,39 @@ router.get('/projects/submit', (req, res) => {
 		res.redirect('/login');
 	}
 });
+ router.post('/createCollection', async (req, res) => {
+	try {
+		if (req.session.user) {
+			const user = req.session.user;
+			const createdBy = req.session.user._id;
+			const name = req.body.name;
+			const projectID = req.body.projectID;
+			let Collection = [];
 
-// router.post('/createCollection', async (req, res) => {
-// 	try {
-// 		const user = req.session.user;
-// 		const createdBy = req.session.user._id;
-// 		const name = req.body.name;
-// 		const projectID = req.body.projectID;
+			Collection = await collections.getCollection({ createdBy });
+			for (var i = 0; i < Collection.length; i++) {
+				if (Collection[i].name === name) {
+					return res.redirect(`/MyCollection`);
+				}
+			}
 
-// 		await collections.create({ name, createdBy, projectID }).then(collections => {
-// 			if (collections[0] === true) {
-// 				req.session.user = user;
-// 				res.redirect('/MyCollection');
-// 			} else {
-// 				req.flash(
-// 					'error',
-// 					'There was an error while trying to save your project, please try again'
-// 				);
-// 				res.redirect(`{/projects/${projectID}}`);
-// 			}
-// 		});
-// 	} catch (error) {
-// 		res.redirect('/login');
-// 	}
-// });
+			await collections.create({ name, createdBy, projectID }).then(Collection => {
+				if (Collection[0] === true) {
+					req.session.user = user;
+					res.redirect(`/MyCollection`);
+				} else {
+					req.flash('error', Collection[1]);
+					res.redirect(`/MyCollection`);
+				}
+			});
+		} else {
+			req.flash('error', 'You must be logged in to create a collection');
+			res.redirect('/login');
+		}
+	} catch (error) {
+		console.log(error);
+	}
+});
 
 router.get('/MyLibrary/:id', async (req, res) => {
 	const id = req.params.id;
