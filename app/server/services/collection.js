@@ -40,9 +40,25 @@ const saveToCollection = async ({ projectID, name }) => {
 	return false;
 };
 
+/*Change status of project from private to public and vice versa */
+const changeStatus = async ({ status, id }) => {
+	const collection = await Collection.findById({ _id: id });
+	if (status === 'Private') {
+		collection.status = 'Public';
+	} else if (status === 'Public') {
+		collection.status = 'Private';
+	}
+	const saved = await collection.save();
+	if (saved) {
+		return [true, collection];
+	}
+	return false;
+};
+
 module.exports = {
 	create,
 	getById,
 	getCollection,
-	saveToCollection
+	saveToCollection,
+	changeStatus
 };

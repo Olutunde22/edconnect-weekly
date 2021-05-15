@@ -16,6 +16,7 @@ router.get('/projects/submit', (req, res) => {
 	}
 });
 
+
 router.post('/projects/submit', async (req, res) => {
 	try {
 		const createdBy = req.session.user._id;
@@ -43,13 +44,15 @@ router.get('/project/:id', async (req, res) => {
 		const user = req.session.user;
 		const id = req.params.id;
 		let collectionNames = [];
+		let error = req.flash('error')
+		let success = req.flash('success')
 		if (req.session.user) {
 			const createdBy = req.session.user._id;
 			collectionNames = await collection.getCollection({ createdBy });
 		}
 		await project.getById(id).then(Project => {
 			const User = Project.createdBy;
-			res.render('Project', { Project, User, user, collectionNames });
+			res.render('Project', { Project, User, user, collectionNames, error, success });
 		});
 	} catch (error) {
 		res.redirect('/');
@@ -68,6 +71,7 @@ router.post('/project/createCollection', async (req, res) => {
 			Collection = await collection.getCollection({ createdBy });
 			for (var i = 0; i < Collection.length; i++) {
 				if (Collection[i].name === name) {
+					req.flash('error', 'This collection name exists in your collection');
 					return res.redirect(`/project/${projectID}`);
 				}
 			}
@@ -75,6 +79,7 @@ router.post('/project/createCollection', async (req, res) => {
 			await collection.create({ name, createdBy, projectID }).then(Collection => {
 				if (Collection[0] === true) {
 					req.session.user = user;
+					req.flash('success', 'Project has been added to your collection');
 					res.redirect(`/project/${projectID}`);
 				} else {
 					req.flash('error', Colelction[1]);

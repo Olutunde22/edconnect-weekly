@@ -9,7 +9,8 @@ import {
 	Col,
 	Card,
 	Modal,
-	Form
+	Form,
+	Alert
 } from 'react-bootstrap';
 
 const Project = props => {
@@ -20,9 +21,11 @@ const Project = props => {
 	const [createdAt, setCreatedAt] = useState('');
 	const [lastUpdated, setLastUpdated] = useState('');
 	const [collectionName, setCollectionName] = useState([]);
+	const [error, setError] = useState('');
+	const [success, setSuccess] = useState('');
 	const [show, setShow] = useState(false);
 	const [collectShow, setCollectShow] = useState(false);
-	const [NewCollectionName, setNewCollectionName] = useState('')
+	const [NewCollectionName, setNewCollectionName] = useState('');
 	let created = new Date(props.Project.createdAt).toLocaleDateString();
 	let updated = new Date(props.Project.updatedAt).toLocaleDateString();
 
@@ -38,8 +41,9 @@ const Project = props => {
 		setCreatedAt(created);
 		setLastUpdated(updated);
 		setCollectionName(props.collectionNames);
+		setError(props.error);
+		setSuccess(props.success);
 	}, []);
-
 
 	const handleInputChange = event => {
 		const { value } = event.target;
@@ -50,6 +54,8 @@ const Project = props => {
 		<Layout {...user}>
 			<>
 				<Container>
+					{error.length > 0 ? <Alert variant="warning">{error}</Alert> : null}
+					{success.length > 0 ? <Alert variant="success">{success}</Alert> : null}
 					<Row>
 						<Col>
 							<div className="mt-5">
@@ -72,7 +78,9 @@ const Project = props => {
 										<Form.Control as="select" name="name" value={collectionName.name}>
 											<option>Choose...</option>
 											{collectionName.length > 0
-												? collectionName.map(collection => <option key={collection.name}>{collection.name}</option>)
+												? collectionName.map(collection => (
+														<option key={collection.name}>{collection.name}</option>
+												  ))
 												: null}
 										</Form.Control>
 									</Modal.Body>
