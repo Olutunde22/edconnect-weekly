@@ -9,6 +9,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('express-flash');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 const store = new MongoDBStore({
 	uri: process.env.MONGODB_URI,
@@ -49,10 +50,7 @@ register(app).then(() => {
 	app.use('/', require('./controllers/collection'));
 	app.use(express.static('public'));
 
-	console.log(process.env.PORT)
-	app.listen(process.env.PORT || 5000, () =>
-		console.log('Server listening')
-	);
+	app.listen(PORT, () => console.log('Server listening'));
 
 	mongoose.set('bufferCommands', false);
 
