@@ -46,8 +46,9 @@ const MyCollection = props => {
 				{success.length > 0 ? <Alert variant="success">{success}</Alert> : null}
 				<Row>
 					<Col>
-						<h2 className="mt-5 mb-5">My Library</h2>
+						<h2 className="mt-5 mb-5">{collection.name}</h2>
 					</Col>
+
 					<Col>
 						{User._id === createdBy ? (
 							<Button variant="danger" className="mt-5 mb-5" onClick={DeleteShow}>
@@ -95,24 +96,21 @@ const MyCollection = props => {
 
 				<Row>
 					<Col>
-						{User._id === createdBy ? 
+						{User._id === createdBy ? (
 							<Button variant="primary" onClick={CollectShow}>
 								Create Collection
 							</Button>
-						// ) : User ? (
+						) : // ) : User ? (
 						// 	<Button variant="primary" onClick={CollectShow}>
 						// 		Add To Library
 						// 	</Button>
 						// )
-						: null}
+						null}
 					</Col>
-					<Col lg={6}>
-						<h2>{collection.name}</h2>
-					</Col>
-					<Col>
+					<Col >
 						{User._id === createdBy ? (
-							<Form method="POST" action="status" path="/status">
-								<Button variant="primary" type="submit">
+							<Form method="POST"  action="status" path="/status">
+								<Button variant="primary"  type="submit">
 									{collection.status === 'Private' ? 'Make Public' : 'Make Private'}
 								</Button>
 								<input type="hidden" name="status" value={collection.status} />
@@ -149,7 +147,7 @@ const MyCollection = props => {
 												<td>
 													<Form method="POST" action="delete" path="/delete">
 														<Button variant="danger" type="submit">
-														<MdDelete />
+															<MdDelete />
 														</Button>
 														<input type="hidden" name="projectID" value={projects._id} />
 														<input type="hidden" name="collectionID" value={collection._id} />
