@@ -95,15 +95,16 @@ const MyCollection = props => {
 
 				<Row>
 					<Col>
-						{User._id === createdBy ? (
+						{User._id === createdBy ? 
 							<Button variant="primary" onClick={CollectShow}>
 								Create Collection
 							</Button>
-						) : User ? (
-							<Button variant="primary" onClick={CollectShow}>
-								Add To Library
-							</Button>
-						) : null}
+						// ) : User ? (
+						// 	<Button variant="primary" onClick={CollectShow}>
+						// 		Add To Library
+						// 	</Button>
+						// )
+						: null}
 					</Col>
 					<Col lg={6}>
 						<h2>{collection.name}</h2>
@@ -158,7 +159,7 @@ const MyCollection = props => {
 										</tr>
 									))
 								) : (
-									<h3>No project in this collection</h3>
+									<h4>No project in this collection</h4>
 								)}
 							</tbody>
 						</table>
