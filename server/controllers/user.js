@@ -15,9 +15,9 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
-	const User = await user
+	await user
 		.authenticate(email, password)
-		.then((User) => {
+		.then(User => {
 			if (User[0] === true) {
 				req.session.user = User[1];
 				res.redirect('/');
@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
 				res.redirect('/login');
 			}
 		})
-		.catch((error) => {
+		.catch(error => {
 			console.log(error);
 		});
 });
@@ -54,9 +54,9 @@ router.post('/signup', async (req, res) => {
 			password,
 			matricNumber,
 			program,
-			graduationYear,
+			graduationYear
 		})
-		.then((User) => {
+		.then(User => {
 			if (User[0] === true) {
 				req.session.user = User[1];
 				res.redirect('/');
@@ -65,7 +65,7 @@ router.post('/signup', async (req, res) => {
 				res.redirect('/signup');
 			}
 		})
-		.catch((error) => {
+		.catch(error => {
 			console.log(error);
 		});
 });
