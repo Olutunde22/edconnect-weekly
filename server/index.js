@@ -9,12 +9,11 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('express-flash');
 const app = express();
-const SERVER_PORT = process.env.PORT || 4000;
 
 const store = new MongoDBStore({
 	uri: process.env.MONGODB_URI,
 	collection: 'mySessions'
-  });
+});
 
 register(app).then(() => {
 	app.use((req, res, next) => {
@@ -27,7 +26,7 @@ register(app).then(() => {
 	app.use(bodyParser.json());
 	app.use(
 		bodyParser.urlencoded({
-			extended: true,
+			extended: true
 		})
 	);
 
@@ -35,11 +34,11 @@ register(app).then(() => {
 		session({
 			secret: 'secret',
 			cookie: {
-				maxAge: 1000 * 60 * 60 * 24 * 7,
+				maxAge: 1000 * 60 * 60 * 24 * 7
 			},
-			store,
+			store: store,
 			resave: true,
-			saveUninitialized: false,
+			saveUninitialized: false
 		})
 	);
 
@@ -50,7 +49,9 @@ register(app).then(() => {
 	app.use('/', require('./controllers/collection'));
 	app.use(express.static('public'));
 
-	app.listen(SERVER_PORT, () => console.log('Server listening on port ' + SERVER_PORT));
+	app.listen(process.env.PORT || 5000, () =>
+		console.log('Server listening')
+	);
 
 	mongoose.set('bufferCommands', false);
 
@@ -62,12 +63,12 @@ register(app).then(() => {
 
 			useUnifiedTopology: true,
 
-			useCreateIndex: true,
+			useCreateIndex: true
 		},
 
 		// callback that’s called when connection succeeds or fails.
 
-		(err) => {
+		err => {
 			if (err) {
 				console.log('Error connecting to db: ', err);
 			} else {
