@@ -78,9 +78,9 @@ router.get('/MyLibrary/:id', async (req, res) => {
 		let collection = await collections.getById(id);
 		createdBy = collection.createdBy;
 		Collection = await collections.getCollection({ createdBy });
-		if (collection.status === 'Private') {
+		if (collection.status == 'Private') {
 			if (User) {
-				if (User._id == createdBy) {
+				if (JSON.stringify(User._id) === JSON.stringify(createdBy)) {
 					res.render('MyLibrary', { collection, User, createdBy, error, success, Collection });
 				} else {
 					req.flash('error', 'You don’t have access to this collection');
@@ -90,7 +90,7 @@ router.get('/MyLibrary/:id', async (req, res) => {
 				req.flash('error', 'You don’t have access to this collection');
 				res.redirect('/login');
 			}
-		} else if (collection.status === 'Public') {
+		} else if (collection.status == 'Public') {
 			res.render('MyLibrary', { collection, User, createdBy, error, success, Collection });
 		}
 	} catch (error) {

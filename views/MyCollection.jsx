@@ -92,15 +92,15 @@ const MyCollection = props => {
 							}
 						})
 						.map(collections => (
-							<Card className="border p-3 mb-3">
-								<a href={`/MyLibrary/${collections._id}`} className="text-primary">
+							<Card key={collections.name} className="border p-3 mb-3">
+								<a href={`/MyLibrary/${collections._id}`}  className="text-primary">
 									{' '}
 									{collections.name}
 								</a>
 							</Card>
 						))
 				) : (
-					<h3>Sorry you have not yet created a collection, create one now</h3>
+					<p>Sorry you have not yet created a collection, create one now</p>
 				)}
 			</>
 		</Layout>

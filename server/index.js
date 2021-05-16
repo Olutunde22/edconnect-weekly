@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
- 
-
-
 const flash = require('express-flash');
 const app = express();
 const SERVER_PORT = process.env.PORT || 4000;

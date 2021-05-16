@@ -5,7 +5,6 @@
 	"keywords": [],
 	"author": "",
 	"scripts": {
-		"dev": "nodemon server/index.js",
 		"start": "node server/index.js"
 	},
 	"license": "ISC",
