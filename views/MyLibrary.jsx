@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Button, Form, Modal, Alert, Row, Col } from 'react-bootstrap';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const MyCollection = props => {
 	const { User } = props;
@@ -148,9 +146,9 @@ const MyCollection = props => {
 											{User._id === createdBy ? (
 												<td>
 													<Form method="POST" action="delete" path="/delete">
-														<IconButton aria-label="delete" type="submit">
-															<DeleteIcon />
-														</IconButton>
+														<Button variant="danger" type="submit">
+															Delete Project
+														</Button>
 														<input type="hidden" name="projectID" value={projects._id} />
 														<input type="hidden" name="collectionID" value={collection._id} />
 													</Form>
