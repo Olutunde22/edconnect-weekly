@@ -49,6 +49,7 @@ register(app).then(() => {
 	app.use('/', require('./controllers/collection'));
 	app.use(express.static('public'));
 
+	console.log(process.env.PORT)
 	app.listen(process.env.PORT || 5000, () =>
 		console.log('Server listening')
 	);
