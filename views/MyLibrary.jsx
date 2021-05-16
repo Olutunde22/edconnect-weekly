@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Button, Form, Modal, Alert, Row, Col } from 'react-bootstrap';
+import { MdDelete } from 'react-icons/md';
 
 const MyCollection = props => {
 	const { User } = props;
@@ -147,7 +148,7 @@ const MyCollection = props => {
 												<td>
 													<Form method="POST" action="delete" path="/delete">
 														<Button variant="danger" type="submit">
-															Delete Project
+														<MdDelete />
 														</Button>
 														<input type="hidden" name="projectID" value={projects._id} />
 														<input type="hidden" name="collectionID" value={collection._id} />
