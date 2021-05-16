@@ -50,7 +50,7 @@ register(app).then(() => {
 	app.use('/', require('./controllers/collection'));
 	app.use(express.static('public'));
 
-	app.listen(PORT, () => console.log('Server listening'));
+	app.listen(PORT, '0.0.0.0', () => console.log('Server listening on port ' + PORT));
 
 	mongoose.set('bufferCommands', false);
 
