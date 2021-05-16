@@ -104,7 +104,7 @@ router.post('/project/unsave', async (req, res) => {
 			const projectID = req.body.projectID;
 			const id = req.body.colID;
 			await collection.deleteProject({ projectID, id }).then(result => {
-				if (result == true) {
+				if (result) {
 					req.session.user = user;
 					req.flash('success', `Project removed from collection`);
 					res.redirect(`/project/${projectID}`);
