@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Button, Form, Modal, Alert, Row, Col } from 'react-bootstrap';
 import { MdDelete } from 'react-icons/md';
+import moment from 'moment'
 
 const MyCollection = props => {
 	const { User } = props;
@@ -142,7 +143,8 @@ const MyCollection = props => {
 												</a>
 											</td>
 											<td>{projects.authors}</td>
-											<td>{projects.createdAt}</td>
+											<td>{moment(projects.createdAt).format('MMMM Do, YYYY.')}</td>
+										
 											{User._id === createdBy ? (
 												<td>
 													<Form method="POST" action="delete" path="/delete">
