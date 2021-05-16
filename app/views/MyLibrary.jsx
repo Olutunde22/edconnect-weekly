@@ -96,9 +96,15 @@ const MyCollection = props => {
 
 				<Row>
 					<Col>
-						<Button variant="primary" onClick={CollectShow}>
-							Create Collection
-						</Button>
+						{User._id === createdBy ? (
+							<Button variant="primary" onClick={CollectShow}>
+								Create Collection
+							</Button>
+						) : User ? (
+							<Button variant="primary" onClick={CollectShow}>
+								Add To Library
+							</Button>
+						) : null}
 					</Col>
 					<Col lg={6}>
 						<h2>{collection.name}</h2>
@@ -140,15 +146,15 @@ const MyCollection = props => {
 											<td>{projects.authors}</td>
 											<td>{projects.createdAt}</td>
 											{User._id === createdBy ? (
-											<td>
-												<Form method="POST" action="delete" path="/delete">
-													<IconButton aria-label="delete" type="submit">
-														<DeleteIcon />
-													</IconButton>
-													<input type="hidden" name="projectID" value={projects._id} />
-													<input type="hidden" name="collectionID" value={collection._id} />
-												</Form>
-											</td>
+												<td>
+													<Form method="POST" action="delete" path="/delete">
+														<IconButton aria-label="delete" type="submit">
+															<DeleteIcon />
+														</IconButton>
+														<input type="hidden" name="projectID" value={projects._id} />
+														<input type="hidden" name="collectionID" value={collection._id} />
+													</Form>
+												</td>
 											) : null}
 										</tr>
 									))

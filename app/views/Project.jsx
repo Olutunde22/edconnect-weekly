@@ -15,6 +15,7 @@ import {
 
 const Project = props => {
 	const { user } = props;
+	const { colID } = props;
 	const [projects, setProjects] = useState([]);
 	const [createdBy, setCreatedBy] = useState('');
 	const [authors, setAuthors] = useState([]);
@@ -23,6 +24,7 @@ const Project = props => {
 	const [collectionName, setCollectionName] = useState([]);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
+	const [saved, setSaved] = useState(false);
 	const [show, setShow] = useState(false);
 	const [collectShow, setCollectShow] = useState(false);
 	const [NewCollectionName, setNewCollectionName] = useState('');
@@ -43,6 +45,7 @@ const Project = props => {
 		setCollectionName(props.collectionNames);
 		setError(props.error);
 		setSuccess(props.success);
+		setSaved(props.saved);
 	}, []);
 
 	const handleInputChange = event => {
@@ -64,9 +67,19 @@ const Project = props => {
 						</Col>
 						<Col className="mt-5">
 							{user != undefined ? (
-								<Button variant="primary" onClick={handleShow}>
-									Save
-								</Button>
+								saved ? (
+									<Form method="POST" action="unsave" path="/unsave">
+										<Button variant="primary" type="submit">
+											UnSave
+										</Button>
+										<input type="hidden" name="projectID" value={projects._id} />
+										<input type="hidden" name="colID" value={colID} />
+									</Form>
+								) : (
+									<Button variant="primary" onClick={handleShow}>
+										Save
+									</Button>
+								)
 							) : null}
 
 							<Modal show={show} onHide={handleClose}>
