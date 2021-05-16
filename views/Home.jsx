@@ -6,14 +6,10 @@ const Home = (props) => {
 
 	const {user} = props
 
-	const projects =()=> {
-		setProjects(props.project)
-	}
-
 	const [project, setProjects] = useState([]);
 
 	useEffect(() => {
-		projects();
+		setProjects(props.project)
 	}, []);
 
 
