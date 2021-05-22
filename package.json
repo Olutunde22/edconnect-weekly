@@ -5,7 +5,7 @@
 	"keywords": [],
 	"author": "",
 	"scripts": {
-		"start": "node server/index.js"
+		"start": "node --max-old-space-size=4096 server/index.js"
 	},
 	"license": "ISC",
 	"dependencies": {
