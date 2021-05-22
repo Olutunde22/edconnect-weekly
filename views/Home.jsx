@@ -1,17 +1,15 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Jumbotron, Button, Container, Row, Col, Card } from 'react-bootstrap';
 
-const Home = (props) => {
-
-	const {user} = props
+const Home = props => {
+	const { user } = props;
 
 	const [project, setProjects] = useState([]);
 
 	useEffect(() => {
-		setProjects(props.project)
+		setProjects(props.project);
 	}, []);
-
 
 	return (
 		<Layout {...user}>
@@ -22,17 +20,31 @@ const Home = (props) => {
 						Project Explorer is a repository for final year projects across all departments at your
 						institution. You can upload and search projects and learn from others.
 					</p>
-					<Button variant="primary mr-3" href="/signup">
-						Get Started
-					</Button>
-					<Button variant="secondary" href="/login">
-						Login
-					</Button>
+
+					{user !== undefined ? (
+						<>
+							<Button variant="primary mr-3" href="/projects/submit">
+								Create Project
+							</Button>
+							<Button variant="secondary" href="/MyCollection">
+								My Collections
+							</Button>
+						</>
+					) : (
+						<>
+							<Button variant="primary mr-3" href="/signup">
+								Get Started
+							</Button>
+							<Button variant="secondary" href="/login">
+								Login
+							</Button>
+						</>
+					)}
 				</Jumbotron>
 
 				<Container>
 					<Row className="showcase">
-						{project.slice(0, 8).map((proj) => (
+						{project.slice(0, 8).map(proj => (
 							<Col key={proj.name} className="col-md-3">
 								<Card className="mb-4 box-shadow">
 									<Card.Body>
