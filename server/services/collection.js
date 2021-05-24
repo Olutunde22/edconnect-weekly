@@ -18,7 +18,7 @@ const create = async ({ name, createdBy, projectID }) => {
 };
 
 /* Return collection with specified id */
-const getById = async id => {
+const getById = async (id) => {
 	const collection = await Collection.findById(id).populate('projects');
 	return collection;
 };
@@ -69,6 +69,26 @@ const deleteCollection = async ({ id }) => {
 	await Collection.deleteOne({ _id: id });
 };
 
+const addToLibrary = async ({ collection, createdBy, ownerName }) => {
+	try {
+		const newCollection = new Collection({
+			name: `${collection.name} (Saved from ${ownerName}'s collection)`,
+			createdBy: createdBy
+		});
+
+		for (var i = 0; i < collection.projects.length; i++) {
+			newCollection.projects.push(collection.projects[i]);
+		}
+
+		const saved = await newCollection.save();
+		if (saved) {
+			return [true, newCollection];
+		}
+	} catch (error) {
+		return [false, helper.translateError(error)];
+	}
+};
+
 module.exports = {
 	create,
 	getById,
@@ -76,5 +96,6 @@ module.exports = {
 	saveToCollection,
 	changeStatus,
 	deleteProject,
-	deleteCollection
+	deleteCollection,
+	addToLibrary,
 };

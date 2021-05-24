@@ -47,7 +47,7 @@ router.post(
 					}
 				}
 
-				await collections.create({ name, createdBy, projectID }).then(Collection => {
+				await collections.create({ name, createdBy, projectID }).then((Collection) => {
 					if (Collection[0] === true) {
 						req.session.user = user;
 						req.flash('success', 'Collection created successfully');
@@ -104,7 +104,7 @@ router.post('/MyLibrary/status', async (req, res) => {
 		if (req.session.user) {
 			const status = req.body.status;
 			const id = req.body.collectionID;
-			await collections.changeStatus({ status, id }).then(result => {
+			await collections.changeStatus({ status, id }).then((result) => {
 				if (result[0] == true) {
 					req.flash('success', `Collection is now ${result[1].status}`);
 					res.redirect(`/Mylibrary/${id}`);
@@ -125,7 +125,7 @@ router.post('/MyLibrary/delete', async (req, res) => {
 		if (req.session.user) {
 			const id = req.body.collectionID;
 			const projectID = req.body.projectID;
-			await collections.deleteProject({ projectID, id }).then(result => {
+			await collections.deleteProject({ projectID, id }).then((result) => {
 				if (result == true) {
 					req.flash('success', `Project removed from collection`);
 					res.redirect(`/Mylibrary/${id}`);
@@ -148,6 +148,33 @@ router.post('/MyLibrary/deleteCollection', async (req, res) => {
 			await collections.deleteCollection({ id }).then(() => {
 				req.flash('success', 'Collection deleted');
 				res.redirect('/MyCollection');
+			});
+		}
+	} catch (error) {
+		req.flash('error', `${error}`);
+		res.redirect('/login');
+	}
+});
+
+router.post('/MyLibrary/addToLibrary', async (req, res) => {
+	try {
+		if (req.session.user) {
+			const User = req.session.user;
+			const createdBy = req.session.user._id;
+			const id = req.body.collectionID;
+			let collection = await collections.getById(id);
+			let username = await user.getById(collection.createdBy);
+			let ownerName = username.firstname;
+		
+			await collections.addToLibrary({ collection, createdBy, ownerName }).then((Collection) => {
+				if (Collection[0]) {
+					req.session.user = User;
+					req.flash('success', 'Collection copied successfully');
+					res.redirect(`/MyLibrary/${Collection[1]._id}`);
+				} else {
+					req.flash('error', collection[1]);
+					res.redirect('/MyCollection');
+				}
 			});
 		}
 	} catch (error) {

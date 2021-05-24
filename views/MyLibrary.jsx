@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
-import { Button, Form, Modal, Alert, Row, Col } from 'react-bootstrap';
-import { MdDelete } from 'react-icons/md';
-import moment from 'moment'
+import { Button, Form, Modal, Alert, Row, Col, Tooltip } from 'react-bootstrap';
+import { MdDelete, MdDeleteForever, MdCreate, MdLibraryAdd } from 'react-icons/md';
+import moment from 'moment';
 
-const MyCollection = props => {
+const MyCollection = (props) => {
 	const { User } = props;
 	const { createdBy } = props;
 	const [collection, setCollections] = useState('');
@@ -28,7 +28,7 @@ const MyCollection = props => {
 		setProjects(props.collection.projects);
 	}, []);
 
-	const handleInputChange = event => {
+	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
 		switch (name) {
@@ -53,7 +53,7 @@ const MyCollection = props => {
 					<Col>
 						{User._id === createdBy ? (
 							<Button variant="danger" className="mt-5 mb-5" onClick={DeleteShow}>
-								Delete Collection
+								<MdDeleteForever />
 							</Button>
 						) : null}
 
@@ -97,21 +97,23 @@ const MyCollection = props => {
 
 				<Row>
 					<Col>
-						{User._id === createdBy ? (
+						{JSON.stringify(User._id) === JSON.stringify(createdBy) ? (
 							<Button variant="primary" onClick={CollectShow}>
-								Create Collection
+								<MdCreate />
 							</Button>
-						) : // ) : User ? (
-						// 	<Button variant="primary" onClick={CollectShow}>
-						// 		Add To Library
-						// 	</Button>
-						// )
-						null}
+						) : JSON.stringify(User._id) !== JSON.stringify(createdBy) ? (
+							<Form method="POST" action="addToLibrary" path="/addToLibrary">
+								<Button variant="secondary" type="submit">
+									<MdLibraryAdd />
+								</Button>
+								<input type="hidden" name="collectionID" value={collection._id} />
+							</Form>
+						) : null}
 					</Col>
-					<Col >
+					<Col>
 						{User._id === createdBy ? (
-							<Form method="POST"  action="status" path="/status">
-								<Button variant="primary"  type="submit">
+							<Form method="POST" action="status" path="/status">
+								<Button variant="primary" type="submit">
 									{collection.status === 'Private' ? 'Make Public' : 'Make Private'}
 								</Button>
 								<input type="hidden" name="status" value={collection.status} />
@@ -134,7 +136,7 @@ const MyCollection = props => {
 							</thead>
 							<tbody>
 								{projects.length > 0 ? (
-									projects.map(projects => (
+									projects.map((projects) => (
 										<tr>
 											<td>
 												<a href={`/project/${projects._id}`} className="text-primary">
@@ -144,7 +146,7 @@ const MyCollection = props => {
 											</td>
 											<td>{projects.authors}</td>
 											<td>{moment(projects.createdAt).format('MMMM Do, YYYY.')}</td>
-										
+
 											{User._id === createdBy ? (
 												<td>
 													<Form method="POST" action="delete" path="/delete">
