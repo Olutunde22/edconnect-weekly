@@ -5,7 +5,8 @@
 	"keywords": [],
 	"author": "",
 	"scripts": {
-		"start": "node --max-old-space-size=4096 server/index.js"
+		"start": "node --max-old-space-size=4096 server/index.js",
+		"auto": "nodemon server/index.js"
 	},
 	"license": "ISC",
 	"dependencies": {
@@ -29,6 +30,7 @@
 		"react-icons": "^4.2.0"
 	},
 	"devDependencies": {
+		"@types/jest": "^26.0.23",
 		"cross-env": "^7.0.2",
 		"nodemon": "^2.0.4"
 	}
