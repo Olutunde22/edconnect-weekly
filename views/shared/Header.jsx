@@ -19,7 +19,7 @@ const Header = ({firstname}) => {
 				{firstname !== undefined ? (
 					<Nav className="justify-content-end">
 						<Nav.Link href="/logout"eventKey="">Logout</Nav.Link>
-						<Nav.Link id="username"href="" disabled>Hi, {firstname} </Nav.Link>	
+						<Nav.Link id="username"href="" disabled>Hi, {firstname}</Nav.Link>	
 					</Nav>
 				) : (
 					<Nav className="justify-content-end">
