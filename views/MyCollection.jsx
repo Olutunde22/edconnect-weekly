@@ -1,3 +1,7 @@
+/**
+	React-bootstrap Modal code gotten from https://react-bootstrap.github.io/components/modal/ and was edited to fit project
+ */
+
 import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
 import { Button, Card, Form, Modal, Alert, FormControl } from 'react-bootstrap';
