@@ -1,3 +1,8 @@
+/**
+ * TO create the collection model
+ */
+
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

@@ -6,6 +6,7 @@ const collections = require('../services/collection');
 
 const user = require('../services/user');
 
+//For getting collections that belong to a specific user
 router.get('/MyCollection', async (req, res) => {
 	try {
 		if (req.session.user) {
@@ -28,6 +29,8 @@ router.get('/MyCollection', async (req, res) => {
 	}
 });
 
+// For creating collections using different routes
+// I used different routes cause a user can create a collection from different places on the website
 router.post(
 	['/MyLibrary/createCollection', '/createCollection', '/project/createCollection'],
 	async (req, res) => {
@@ -67,6 +70,7 @@ router.post(
 	}
 );
 
+//For getting a specific library
 router.get('/MyLibrary/:id', async (req, res) => {
 	try {
 		const id = req.params.id;
@@ -99,6 +103,7 @@ router.get('/MyLibrary/:id', async (req, res) => {
 	}
 });
 
+//For changing the status of a library from public to private and vice versa
 router.post('/MyLibrary/status', async (req, res) => {
 	try {
 		if (req.session.user) {
@@ -120,6 +125,7 @@ router.post('/MyLibrary/status', async (req, res) => {
 	}
 });
 
+//For deleting a library
 router.post('/MyLibrary/delete', async (req, res) => {
 	try {
 		if (req.session.user) {
@@ -141,6 +147,7 @@ router.post('/MyLibrary/delete', async (req, res) => {
 	}
 });
 
+//For deleting a collection in a library
 router.post('/MyLibrary/deleteCollection', async (req, res) => {
 	try {
 		if (req.session.user) {
@@ -156,6 +163,7 @@ router.post('/MyLibrary/deleteCollection', async (req, res) => {
 	}
 });
 
+//For adding a collection gotten from a friend to your library
 router.post('/MyLibrary/addToLibrary', async (req, res) => {
 	try {
 		if (req.session.user) {

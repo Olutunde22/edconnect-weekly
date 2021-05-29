@@ -6,6 +6,7 @@ const project = require('../services/project');
 
 const collection = require('../services/collection');
 
+// To get the create project page
 router.get('/projects/submit', (req, res) => {
 	if (req.session.user) {
 		const user = req.session.user;
@@ -17,6 +18,7 @@ router.get('/projects/submit', (req, res) => {
 	}
 });
 
+//To create a project
 router.post('/projects/submit', async (req, res) => {
 	try {
 		if (req.session.user) {
@@ -45,6 +47,7 @@ router.post('/projects/submit', async (req, res) => {
 	}
 });
 
+//To get the project details page
 router.get('/project/:id', async (req, res) => {
 	try {
 		const user = req.session.user;
@@ -74,6 +77,7 @@ router.get('/project/:id', async (req, res) => {
 	}
 });
 
+//To save a project to a collection
 router.post('/project/save', async (req, res) => {
 	try {
 		let user = req.session.user;
@@ -96,6 +100,7 @@ router.post('/project/save', async (req, res) => {
 	}
 });
 
+//To unsave a project from a collection
 router.post('/project/unsave', async (req, res) => {
 	try {
 		let user = req.session.user;

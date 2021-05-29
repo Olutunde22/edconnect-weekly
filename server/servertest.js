@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const session = require('express-session');
 const flash = require('express-flash');
-
+/**
+ * Test server used to run tests
+ */
 const app = express();
 
 app.use((req, res, next) => {

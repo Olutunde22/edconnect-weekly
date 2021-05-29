@@ -4,6 +4,7 @@ const router = express.Router();
 
 const projects = require('../services/project');
 
+//For getting home page
 router.get('/', async (req, res) => {
 	const user = req.session.user;
 	const project = await projects.getAll().then((project) => {
@@ -11,6 +12,7 @@ router.get('/', async (req, res) => {
 	});
 });
 
+//To logout a user
 router.get('/logout', (req, res) => {
 	req.session.destroy(() => {
 		res.redirect('/');

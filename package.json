@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"description": "",
 	"keywords": [],
-	"author": "",
+	"author": "Tunde",
+	"main": "index.js",
 	"scripts": {
 		"start": "node --max-old-space-size=4096 server/index.js",
 		"auto": "nodemon server/index.js",

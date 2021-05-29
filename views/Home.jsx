@@ -42,6 +42,7 @@ const Home = props => {
 					)}
 				</Jumbotron>
 
+						
 				<Container>
 					<Row className="showcase">
 						{project.slice(0, 8).map(proj => (
