@@ -46,7 +46,7 @@ const Home = props => {
 				<Container>
 					<Row className="showcase">
 						{project.slice(0, 8).map(proj => (
-							<Col key={proj.name} className="col-md-3 projects">
+							<Col key={proj.name} md={12} sm={12} lg={3} className="projects">
 								<Card className="mb-4 box-shadow">
 									<Card.Body>
 										<a href={`/project/${proj._id}`} className="text-primary">
