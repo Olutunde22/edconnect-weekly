@@ -69,7 +69,7 @@ router.post('*/createCollection', async (req, res) => {
 router.get('/MyLibrary/:id', async (req, res) => {
 	try {
 		const id = req.params.id;
-		let location = req.protocol + '://' + req.get('host') + `/MyLibrary/${id}`;
+		let location =  'https://' + req.get('host') + `/MyLibrary/${id}`;
 		let error = req.flash('error');
 		let success = req.flash('success');
 		let Collection = [];
