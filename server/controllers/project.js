@@ -115,7 +115,7 @@ router.post('/project/unsave', async (req, res) => {
 					res.redirect(`/project/${projectID}`);
 				} else {
 					req.session.user = user;
-					req.error('error', 'Something went wrong in changing status, please try again later');
+					req.error('error', 'Something went wrong in unsaving project, please try again later');
 					res.redirect(`/project/${projectID}`);
 				}
 			});

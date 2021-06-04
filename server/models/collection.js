@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 const CollectionSchema = new Schema(
 	{
 		name: { type: String, required: true },
-		status: {
+		visibility: {
 			type: String,
 			enum: ['Private', 'Public'],
 			default: 'Private',

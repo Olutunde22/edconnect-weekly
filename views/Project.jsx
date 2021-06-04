@@ -3,6 +3,7 @@
  */
 import React, { useEffect, useState } from 'react';
 import Layout from './shared/Layout';
+import CreateNewCollection from './shared/createNewCollection';
 import {
 	Container,
 	FormControl,
@@ -13,10 +14,11 @@ import {
 	Card,
 	Modal,
 	Form,
-	Alert
+	Alert,
 } from 'react-bootstrap';
 
-const Project = props => {
+
+const Project = (props) => {
 	const { user } = props;
 	const { colID } = props;
 	const [projects, setProjects] = useState([]);
@@ -29,13 +31,10 @@ const Project = props => {
 	const [success, setSuccess] = useState('');
 	const [saved, setSaved] = useState(false);
 	const [show, setShow] = useState(false);
-	const [collectShow, setCollectShow] = useState(false);
-	const [NewCollectionName, setNewCollectionName] = useState('');
+
 	let created = new Date(props.Project.createdAt).toLocaleDateString();
 	let updated = new Date(props.Project.updatedAt).toLocaleDateString();
 
-	const CollectClose = () => setCollectShow(false);
-	const CollectShow = () => setCollectShow(true);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
@@ -50,11 +49,6 @@ const Project = props => {
 		setSuccess(props.success);
 		setSaved(props.saved);
 	}, []);
-
-	const handleInputChange = event => {
-		const { value } = event.target;
-		setNewCollectionName(value);
-	};
 
 	return (
 		<Layout {...user}>
@@ -73,14 +67,14 @@ const Project = props => {
 								saved ? (
 									<Form method="POST" action="unsave" path="/unsave">
 										<Button variant="primary" type="submit">
-											UnSave
+											Unsave from collection 
 										</Button>
 										<input type="hidden" name="projectID" value={projects._id} />
 										<input type="hidden" name="colID" value={colID} />
 									</Form>
 								) : (
 									<Button variant="primary" onClick={handleShow}>
-										Save
+										Save to Collection
 									</Button>
 								)
 							) : null}
@@ -94,48 +88,17 @@ const Project = props => {
 										<Form.Control as="select" name="name" value={collectionName.name}>
 											<option>Choose...</option>
 											{collectionName.length > 0
-												? collectionName.map(collection => (
+												? collectionName.map((collection) => (
 														<option key={collection.name}>{collection.name}</option>
 												  ))
 												: null}
 										</Form.Control>
 									</Modal.Body>
 									<Modal.Footer>
-										<Button variant="secondary" onClick={CollectShow}>
-											Create Collection
-										</Button>
+										<CreateNewCollection variant={'secondary'} projects={projects._id} />
 
 										<Button variant="primary" type="submit">
 											Save
-										</Button>
-										<input type="hidden" name="projectID" value={projects._id} />
-									</Modal.Footer>
-								</Form>
-							</Modal>
-
-							<Modal show={collectShow} onHide={CollectClose}>
-								<Form method="POST" action="createCollection" path="/project/createCollection">
-									<Modal.Header closeButton>
-										<Modal.Title>Collection Name</Modal.Title>
-									</Modal.Header>
-
-									<Modal.Body>
-										<Form.Control
-											value={NewCollectionName}
-											onChange={handleInputChange}
-											type="text"
-											placeholder="Collection Name"
-											id="name"
-											name="name"
-										/>
-									</Modal.Body>
-									<Modal.Footer>
-										<Button variant="secondary" onClick={CollectClose}>
-											Back
-										</Button>
-
-										<Button variant="primary" type="submit">
-											Create
 										</Button>
 										<input type="hidden" name="projectID" value={projects._id} />
 									</Modal.Footer>
@@ -191,7 +154,7 @@ const Project = props => {
 							</Card>
 
 							<Card key={authors} className="border" id="project_authors">
-								{authors.map(authors => (
+								{authors.map((authors) => (
 									<p className="my-4 mx-3">{authors}</p>
 								))}
 							</Card>

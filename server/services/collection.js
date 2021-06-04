@@ -40,13 +40,13 @@ const saveToCollection = async ({ projectID, name }) => {
 	return false;
 };
 
-/*Change status of project from private to public and vice versa */
-const changeStatus = async ({ status, id }) => {
+/*Change visibility of project from private to public and vice versa */
+const changevisibility = async ({ visibility, id }) => {
 	const collection = await Collection.findById({ _id: id });
-	if (status === 'Private') {
-		collection.status = 'Public';
-	} else if (status === 'Public') {
-		collection.status = 'Private';
+	if (visibility === 'Private') {
+		collection.visibility = 'Public';
+	} else if (visibility === 'Public') {
+		collection.visibility = 'Private';
 	}
 	const saved = await collection.save();
 	if (saved) {
@@ -55,6 +55,7 @@ const changeStatus = async ({ status, id }) => {
 	return false;
 };
 
+/*Deletes a project in a collection */
 const deleteProject = async ({ projectID, id }) => {
 	const collection = await Collection.findById({ _id: id });
 	collection.projects.pull(projectID);
@@ -65,15 +66,17 @@ const deleteProject = async ({ projectID, id }) => {
 	return false;
 };
 
+/*Deletes a collection */
 const deleteCollection = async ({ id }) => {
 	await Collection.deleteOne({ _id: id });
 };
 
+/*Adds a collection gotten from another user to your library*/
 const addToLibrary = async ({ collection, createdBy, ownerName }) => {
 	try {
 		const newCollection = new Collection({
 			name: `${collection.name} (Saved from ${ownerName}'s collection)`,
-			createdBy: createdBy
+			createdBy: createdBy,
 		});
 
 		for (var i = 0; i < collection.projects.length; i++) {
@@ -89,12 +92,23 @@ const addToLibrary = async ({ collection, createdBy, ownerName }) => {
 	}
 };
 
+/* Checks if a collection name already exists in a users library */
+const getUserCollection = async ({ createdBy, name }) => {
+	const collection = await Collection.find({ createdBy: createdBy, name: name });
+	if (collection.length > 0) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
 module.exports = {
 	create,
 	getById,
 	getCollection,
 	saveToCollection,
-	changeStatus,
+	getUserCollection,
+	changevisibility,
 	deleteProject,
 	deleteCollection,
 	addToLibrary,

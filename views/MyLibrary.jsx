@@ -3,8 +3,18 @@
  */
 import React, { useState, useEffect } from 'react';
 import Layout from './shared/Layout';
-import { Button, Form, Modal, Alert, Row, Col} from 'react-bootstrap';
-import { MdDelete, MdDeleteForever, MdCreate, MdLibraryAdd } from 'react-icons/md';
+import CreateNewCollection from './shared/createNewCollection';
+import { Button, Form, Modal, Alert, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import {
+	MdDelete,
+	MdDeleteForever,
+	MdLibraryAdd,
+	MdInfoOutline,
+	MdPublic,
+	MdVpnLock,
+	MdContentCopy,
+} from 'react-icons/md';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import moment from 'moment';
 
 const MyCollection = (props) => {
@@ -12,15 +22,11 @@ const MyCollection = (props) => {
 	const { createdBy } = props;
 	const [collection, setCollections] = useState('');
 	const [projects, setProjects] = useState([]);
-	const [NewCollectionName, setNewCollectionName] = useState('');
 	const [CollectionName, setCollectionName] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
-	const [collectShow, setCollectShow] = useState(false);
 	const [deleteShow, setDeleteShow] = useState(false);
 
-	const CollectClose = () => setCollectShow(false);
-	const CollectShow = () => setCollectShow(true);
 	const DeleteClose = () => setDeleteShow(false);
 	const DeleteShow = () => setDeleteShow(true);
 
@@ -32,15 +38,13 @@ const MyCollection = (props) => {
 	}, []);
 
 	const handleInputChange = (event) => {
-		const { name, value } = event.target;
+		const { value } = event.target;
+		setCollectionName(value);
+	};
 
-		switch (name) {
-			case 'collectionName':
-				setCollectionName(value);
-				break;
-			case 'name':
-				setNewCollectionName(value);
-		}
+	const handleCopy = (event) => {
+		event.preventDefault();
+		setSuccess('Copied!');
 	};
 
 	return (
@@ -52,20 +56,85 @@ const MyCollection = (props) => {
 					<Col>
 						<h2 className="mt-5 mb-5">{collection.name}</h2>
 					</Col>
+				</Row>
 
+				<Row>
+					<Col>
+						{JSON.stringify(User._id) === JSON.stringify(createdBy) ? (
+							<CreateNewCollection />
+						) : JSON.stringify(User._id) !== JSON.stringify(createdBy) ? (
+							<Form method="POST" action="addToLibrary" path="/addToLibrary">
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={<Tooltip>Add to Collection</Tooltip>}
+								>
+									<Button variant="secondary" type="submit">
+										<MdLibraryAdd />
+									</Button>
+								</OverlayTrigger>
+
+								<input type="hidden" name="collectionID" value={collection._id} />
+							</Form>
+						) : null}
+					</Col>
 					<Col>
 						{User._id === createdBy ? (
-							<Button variant="danger" className="mt-5 mb-5" onClick={DeleteShow}>
-								<MdDeleteForever />
-							</Button>
+							<Form method="POST" action="visibility" path="/visibility">
+								<OverlayTrigger
+									placement="top"
+									delay={{ show: 250, hide: 400 }}
+									overlay={
+										<Tooltip>
+											{collection.visibility === 'Private'
+												? 'Make collection Public'
+												: 'Make collection Private'}
+										</Tooltip>
+									}
+								>
+									<Button variant="secondary" type="submit">
+										{collection.visibility === 'Private' ? <MdPublic /> : <MdVpnLock />}
+									</Button>
+								</OverlayTrigger>
+								<input type="hidden" name="visibility" value={collection.visibility} />
+								<input type="hidden" name="collectionID" value={collection._id} />
+							</Form>
+						) : null}
+					</Col>
+					<Col>
+						{collection.visibility === 'Public' ? (
+							<OverlayTrigger
+								placement="top"
+								delay={{ show: 250, hide: 400 }}
+								overlay={<Tooltip>Copy link to collection</Tooltip>}
+							>
+								<CopyToClipboard text={props.location}>
+									<Button variant="info" onClick={handleCopy}>
+										<MdContentCopy />
+									</Button>
+								</CopyToClipboard>
+							</OverlayTrigger>
+						) : null}
+					</Col>
+					<Col>
+						{User._id === createdBy ? (
+							<OverlayTrigger
+								placement="top"
+								delay={{ show: 250, hide: 400 }}
+								overlay={<Tooltip>Delete Collection</Tooltip>}
+							>
+								<Button variant="danger" onClick={DeleteShow}>
+									<MdDeleteForever />
+								</Button>
+							</OverlayTrigger>
 						) : null}
 
 						<Modal show={deleteShow} onHide={DeleteClose}>
 							<Form method="POST" action="deleteCollection" path="/deleteCollection">
 								<Modal.Header closeButton>
 									<p className="text-danger font-weight-bold">
-										This will delete this collection and remove all projects inside, type the name
-										of the collection below to continue
+										<MdInfoOutline /> This will delete this collection and remove all projects
+										inside, type the name of the collection below to continue
 									</p>
 								</Modal.Header>
 
@@ -86,7 +155,7 @@ const MyCollection = (props) => {
 
 									<Button
 										variant="danger"
-										className={`${CollectionName !== collection.name ? 'disabled' : 'active'}`}
+										disabled={CollectionName !== collection.name ? true : false}
 										type="submit"
 									>
 										Delete
@@ -95,34 +164,6 @@ const MyCollection = (props) => {
 								</Modal.Footer>
 							</Form>
 						</Modal>
-					</Col>
-				</Row>
-
-				<Row>
-					<Col>
-						{JSON.stringify(User._id) === JSON.stringify(createdBy) ? (
-							<Button variant="primary" onClick={CollectShow}>
-								<MdCreate />
-							</Button>
-						) : JSON.stringify(User._id) !== JSON.stringify(createdBy) ? (
-							<Form method="POST" action="addToLibrary" path="/addToLibrary">
-								<Button variant="secondary" type="submit">
-									<MdLibraryAdd />
-								</Button>
-								<input type="hidden" name="collectionID" value={collection._id} />
-							</Form>
-						) : null}
-					</Col>
-					<Col>
-						{User._id === createdBy ? (
-							<Form method="POST" action="status" path="/status">
-								<Button variant="primary" type="submit">
-									{collection.status === 'Private' ? 'Make Public' : 'Make Private'}
-								</Button>
-								<input type="hidden" name="status" value={collection.status} />
-								<input type="hidden" name="collectionID" value={collection._id} />
-							</Form>
-						) : null}
 					</Col>
 				</Row>
 
@@ -153,9 +194,15 @@ const MyCollection = (props) => {
 											{User._id === createdBy ? (
 												<td>
 													<Form method="POST" action="delete" path="/delete">
-														<Button variant="danger" type="submit">
-															<MdDelete />
-														</Button>
+														<OverlayTrigger
+															placement="top"
+															delay={{ show: 250, hide: 400 }}
+															overlay={<Tooltip>Remove project from collection</Tooltip>}
+														>
+															<Button variant="danger" onClick={DeleteShow}>
+																<MdDelete />
+															</Button>
+														</OverlayTrigger>
 														<input type="hidden" name="projectID" value={projects._id} />
 														<input type="hidden" name="collectionID" value={collection._id} />
 													</Form>
@@ -164,40 +211,14 @@ const MyCollection = (props) => {
 										</tr>
 									))
 								) : (
-									<h4>No project in this collection</h4>
+									<tr>
+										<td>No project in this collection</td>
+									</tr>
 								)}
 							</tbody>
 						</table>
 					</Col>
 				</Row>
-
-				<Modal show={collectShow} onHide={CollectClose}>
-					<Form method="POST" action="createCollection" path="/MyLibrary/createCollection">
-						<Modal.Header closeButton>
-							<Modal.Title>Collection Name</Modal.Title>
-						</Modal.Header>
-
-						<Modal.Body>
-							<Form.Control
-								value={NewCollectionName}
-								onChange={handleInputChange}
-								type="text"
-								placeholder="Collection Name"
-								id="name"
-								name="name"
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button variant="secondary" onClick={CollectClose}>
-								Back
-							</Button>
-
-							<Button variant="primary" type="submit">
-								Create
-							</Button>
-						</Modal.Footer>
-					</Form>
-				</Modal>
 			</>
 		</Layout>
 	);
