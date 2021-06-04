@@ -17,7 +17,6 @@ import {
 	Alert,
 } from 'react-bootstrap';
 
-
 const Project = (props) => {
 	const { user } = props;
 	const { colID } = props;
@@ -67,7 +66,7 @@ const Project = (props) => {
 								saved ? (
 									<Form method="POST" action="unsave" path="/unsave">
 										<Button variant="primary" type="submit">
-											Unsave from collection 
+											Unsave from collection
 										</Button>
 										<input type="hidden" name="projectID" value={projects._id} />
 										<input type="hidden" name="colID" value={colID} />
@@ -121,7 +120,7 @@ const Project = (props) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col>
+						<Col md={12} sm={12} lg={6}>
 							<FormGroup>
 								<h3 className="mt-5">Project Abstract</h3>
 								<hr className="hori" />
@@ -146,7 +145,7 @@ const Project = (props) => {
 							</FormGroup>
 						</Col>
 
-						<Col className="mb-5">
+						<Col className="mb-5" md={12} sm={12} lg={6}>
 							<h3 className="mt-5">Project Details</h3>
 							<hr />
 							<Card className="border bg-light">
