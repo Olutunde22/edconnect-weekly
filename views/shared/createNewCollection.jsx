@@ -25,7 +25,7 @@ const CreateNewCollection = (props) => {
 				delay={{ show: 250, hide: 400 }}
 				overlay={<Tooltip>Create new collection</Tooltip>}
 			>
-				<Button variant={props.variant} onClick={CollectShow}>
+				<Button className="create_btn" variant={props.variant} onClick={CollectShow}>
 					<MdCreate />
 				</Button>
 			</OverlayTrigger>
@@ -50,7 +50,7 @@ const CreateNewCollection = (props) => {
 							Back
 						</Button>
 
-						<Button variant="primary" type="submit">
+						<Button className="col_btn" variant="primary" type="submit">
 							Create
 						</Button>
 					</Modal.Footer>

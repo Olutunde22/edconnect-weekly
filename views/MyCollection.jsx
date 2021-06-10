@@ -27,8 +27,8 @@ const MyCollection = (props) => {
 	return (
 		<Layout {...User}>
 			<>
-				{error.length > 0 ? <Alert variant="warning">{error}</Alert> : null}
-				{success.length > 0 ? <Alert variant="success">{success}</Alert> : null}
+				{error.length > 0 ? <Alert className="message" variant="warning">{error}</Alert> : null}
+				{success.length > 0 ? <Alert className="message" variant="success">{success}</Alert> : null}
 				<h2 className="mt-5">{collectionOwner}'s Collections</h2>
 				<div>
 					<CreateNewCollection variant={'primary'}/>

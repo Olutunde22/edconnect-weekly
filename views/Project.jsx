@@ -65,14 +65,14 @@ const Project = (props) => {
 							{user != undefined ? (
 								saved ? (
 									<Form method="POST" action="unsave" path="/unsave">
-										<Button variant="primary" type="submit">
+										<Button className="click_btn" variant="primary" type="submit">
 											Unsave from collection
 										</Button>
 										<input type="hidden" name="projectID" value={projects._id} />
 										<input type="hidden" name="colID" value={colID} />
 									</Form>
 								) : (
-									<Button variant="primary" onClick={handleShow}>
+									<Button className="click_btn" variant="primary" onClick={handleShow}>
 										Save to Collection
 									</Button>
 								)

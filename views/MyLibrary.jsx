@@ -169,7 +169,7 @@ const MyCollection = (props) => {
 
 				<Row>
 					<Col>
-						<table className="table mt-5">
+						<table id="tableID" className="table mt-5">
 							<thead>
 								<tr>
 									<th scope="col">Title</th>
@@ -181,7 +181,7 @@ const MyCollection = (props) => {
 							<tbody>
 								{projects.length > 0 ? (
 									projects.map((projects) => (
-										<tr>
+										<tr key={projects.name}>
 											<td>
 												<a href={`/project/${projects._id}`} className="text-primary">
 													{' '}
