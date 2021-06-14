@@ -37,6 +37,9 @@ app.use(
 
 app.use(flash());
 app.use('/', require('./controllers/user'));
+app.use('/', require('./controllers/home'));
+app.use('/', require('./controllers/project'));
+app.use('/', require('./controllers/collection'));
 app.use(express.static('public'));
 
 module.exports = app;
